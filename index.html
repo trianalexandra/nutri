@@ -163,6 +163,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .badge-expired{background:#ffe0e0;color:#c43030}
 .pantry-delete{background:none;border:none;color:var(--ink-light);cursor:pointer;font-size:16px;padding:2px 4px;line-height:1}
 .toggle-form-btn{font-size:13px;color:var(--sage);background:none;border:1px solid var(--sage-mid);border-radius:20px;padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--white);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
 </head>
 <body>
@@ -192,7 +195,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
       <button class="water-btn" onclick="addWater(350)">+350ml</button>
       <button class="water-btn" onclick="addWater(500)">+500ml</button>
     </div>
-    <button class="water-reset" onclick="resetWater()">Reiniciar</button>
+    <div id="water-reset-wrap"><button class="water-reset" onclick="showResetConfirm()">Reiniciar</button></div>
   </div>
   <div class="card" style="padding:14px">
     <div class="card-label" style="padding:0 4px 2px">🍽️ Comidas de hoy</div>
@@ -390,15 +393,33 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 
 </div>
 <script>
-document.getElementById('todayDate').textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
-const todayKey = new Date().toISOString().split('T')[0];
+function getLocalDateKey() {
+  const lima = new Date(new Date().toLocaleString('en-US', {timeZone:'America/Lima'}));
+  const y = lima.getFullYear();
+  const m = String(lima.getMonth()+1).padStart(2,'0');
+  const d = String(lima.getDate()).padStart(2,'0');
+  return y+'-'+m+'-'+d;
+}
+const todayKey = getLocalDateKey();
+document.getElementById('todayDate').textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',timeZone:'America/Lima'});
+setInterval(function(){ if(getLocalDateKey()!==todayKey) location.reload(); }, 60000);
 function ld(k,fb){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):fb}catch{return fb}}
 function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
 
 let water=ld('water_'+todayKey,0);
 function renderWater(){document.getElementById('waterDisplay').textContent=water;document.getElementById('waterBar').style.width=Math.min((water/1500)*100,100)+'%'}
 function addWater(ml){water+=ml;sv('water_'+todayKey,water);renderWater()}
-function resetWater(){if(confirm('¿Reiniciar el agua de hoy?')){water=0;sv('water_'+todayKey,0);renderWater()}}
+function showResetConfirm(){
+  document.getElementById('water-reset-wrap').innerHTML=
+    '<div style="display:flex;gap:8px;margin-top:8px">'+
+    '<button class="water-reset" style="color:var(--clay)" onclick="resetWater()">Sí, reiniciar</button>'+
+    '<button class="water-reset" onclick="cancelReset()">Cancelar</button>'+
+    '</div>';
+}
+function cancelReset(){
+  document.getElementById('water-reset-wrap').innerHTML='<button class="water-reset" onclick="showResetConfirm()">Reiniciar</button>';
+}
+function resetWater(){water=0;sv('water_'+todayKey,0);renderWater();cancelReset();}
 renderWater();
 
 const meals=ld('meals_'+todayKey,{desayuno:'',almuerzo:'',colacion:'',cena:''});
@@ -410,9 +431,9 @@ renderMeals();
 renderPantry();
 function toggleAntojo(){document.getElementById('antojo-panel').classList.toggle('open')}
 function toggleChip(el){el.classList.toggle('selected')}
-function saveAntojo(){const text=document.getElementById('antojo-text').value.trim();const chips=[...document.querySelectorAll('.antojo-chip.selected')].map(c=>c.textContent);if(!text&&chips.length===0)return;antojos.push({time:new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),tipos:chips,texto:text});sv('antojos_'+todayKey,antojos);document.getElementById('antojo-text').value='';document.querySelectorAll('.antojo-chip').forEach(c=>c.classList.remove('selected'));document.getElementById('antojo-panel').classList.remove('open');alert('Antojo registrado ✓')}
+function saveAntojo(){const text=document.getElementById('antojo-text').value.trim();const chips=[...document.querySelectorAll('.antojo-chip.selected')].map(c=>c.textContent);if(!text&&chips.length===0)return;antojos.push({time:new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),tipos:chips,texto:text});sv('antojos_'+todayKey,antojos);document.getElementById('antojo-text').value='';document.querySelectorAll('.antojo-chip').forEach(c=>c.classList.remove('selected'));document.getElementById('antojo-panel').classList.remove('open');showToast('Antojo registrado ✓');}
 function showTab(n,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');if(n==='historial')renderHistory()}
-function renderHistory(){const c=document.getElementById('history-content');const days=[];for(let i=0;i<14;i++){const d=new Date();d.setDate(d.getDate()-i);const k=d.toISOString().split('T')[0];const m=ld('meals_'+k,null);const w=ld('water_'+k,0);const a=ld('antojos_'+k,[]);if(m&&Object.values(m).some(v=>v))days.push({date:d,meals:m,water:w,antojos:a})}if(days.length===0){c.innerHTML='<div class="empty-state"><div class="big">📋</div>Aún no hay historial.<br>Empieza registrando hoy.</div>';return}const mn={desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación',cena:'Cena'};c.innerHTML=days.map(d=>{const ds=d.date.toLocaleDateString('es-PE',{weekday:'short',day:'numeric',month:'short'});const f=Object.values(d.meals).filter(v=>v).length;const p=Math.round((f/4)*100);const sc=p>=75?'var(--sage)':p>=50?'var(--warn)':'var(--clay)';const mr=Object.entries(d.meals).filter(([,v])=>v).map(([k,v])=>`<div class="history-meal-row"><span class="history-meal-name">${mn[k]}</span><span>${v.length>45?v.slice(0,45)+'…':v}</span></div>`).join('');const an=d.antojos.length>0?`<div style="margin-top:8px;font-size:12px;color:var(--clay)">🍫 ${d.antojos.length} antojo(s)</div>`:'';return`<div class="history-day"><div class="history-day-header"><div class="history-date">${ds}</div><div class="history-score" style="background:${sc}22;color:${sc}">${f}/4 comidas</div></div><div class="history-meals">${mr}</div>${an}<div style="margin-top:4px;font-size:12px;color:var(--ink-light)">💧 ${d.water}ml</div></div>`}).join('')}
+function renderHistory(){const c=document.getElementById('history-content');const days=[];for(let i=0;i<14;i++){const base=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));base.setDate(base.getDate()-i);const y=base.getFullYear(),mo=String(base.getMonth()+1).padStart(2,'0'),dd=String(base.getDate()).padStart(2,'0');const k=`${y}-${mo}-${dd}`;const d=base;const m=ld('meals_'+k,null);const w=ld('water_'+k,0);const a=ld('antojos_'+k,[]);if(m&&Object.values(m).some(v=>v))days.push({date:d,meals:m,water:w,antojos:a})}if(days.length===0){c.innerHTML='<div class="empty-state"><div class="big">📋</div>Aún no hay historial.<br>Empieza registrando hoy.</div>';return}const mn={desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación',cena:'Cena'};c.innerHTML=days.map(d=>{const ds=d.date.toLocaleDateString('es-PE',{weekday:'short',day:'numeric',month:'short'});const f=Object.values(d.meals).filter(v=>v).length;const p=Math.round((f/4)*100);const sc=p>=75?'var(--sage)':p>=50?'var(--warn)':'var(--clay)';const mr=Object.entries(d.meals).filter(([,v])=>v).map(([k,v])=>`<div class="history-meal-row"><span class="history-meal-name">${mn[k]}</span><span>${v.length>45?v.slice(0,45)+'…':v}</span></div>`).join('');const an=d.antojos.length>0?`<div style="margin-top:8px;font-size:12px;color:var(--clay)">🍫 ${d.antojos.length} antojo(s)</div>`:'';return`<div class="history-day"><div class="history-day-header"><div class="history-date">${ds}</div><div class="history-score" style="background:${sc}22;color:${sc}">${f}/4 comidas</div></div><div class="history-meals">${mr}</div>${an}<div style="margin-top:4px;font-size:12px;color:var(--ink-light)">💧 ${d.water}ml</div></div>`}).join('')}
 
 const SECTION_PROMPTS={
   desayunos:{label:'desayunos rápidos sin lactosa',note:'Sin lactosa. Máximo 10 min o sin cocinar. Ingredientes de mercado, Wong o Plaza Vea en Lima, Perú. Proteína + carbohidrato complejo para sostener energía hasta el almuerzo.'},
@@ -446,7 +467,7 @@ async function analyzeDay(){
   const a=ld('antojos_'+todayKey,[]);
   a.forEach(ant=>{const t=ant.tipos.length>0?`(${ant.tipos.join(', ')})`:'';parts.push(`Antojo a las ${ant.time} ${t}: ${ant.texto}`)});
   const summary=parts.join('\n');
-  if(!Object.values(m).some(v=>v)){alert('Registra al menos una comida antes de analizar.');return}
+  if(!Object.values(m).some(v=>v)){showToast('Registra al menos una comida primero');return}
   btn.disabled=true;card.classList.add('open');loading.style.display='flex';result.innerHTML='';
   const prompt=`Eres nutricionista de seguimiento. Paciente: Tri, mujer, 58.35kg, 1.53m, pole sport 2x/semana por las noches, TDAH, sin lactosa. Objetivo: reducir grasa abdominal. Meta agua: 1500ml/día. Puntos débiles: antojos nocturnos, come por impulso/aburrimiento, se aburre de lo mismo.\n\nRegistro de hoy:\n${summary}\n\nAnaliza brevemente (máx 180 palabras):\n✓ Qué estuvo bien (1-2 cosas concretas)\n⚠ Qué ajustar mañana (con alternativa concreta)\n💡 Un insight si hubo antojo o caída\n\nNo moralices. Tono directo y cercano. Segunda persona.`;
   try{
@@ -461,8 +482,8 @@ async function analyzeDay(){
 function exportData(){
   const data={meals:{},water:{},antojos:{},exported_at:new Date().toISOString(),version:1};
   for(let i=0;i<365;i++){
-    const d=new Date();d.setDate(d.getDate()-i);
-    const k=d.toISOString().split('T')[0];
+    const d=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));d.setDate(d.getDate()-i);
+    const y=d.getFullYear(),mo=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');const k=y+'-'+mo+'-'+dd;
     const m=ld('meals_'+k,null);
     const w=ld('water_'+k,0);
     const a=ld('antojos_'+k,[]);
@@ -482,7 +503,7 @@ function toggleImport(){document.getElementById('import-area').classList.toggle(
 function importData(){
   try{
     const raw=document.getElementById('import-json').value.trim();
-    if(!raw){alert('Pega el JSON primero.');return}
+    if(!raw){showToast('Pega el JSON primero');return}
     const data=JSON.parse(raw);
     let count=0;
     if(data.meals){Object.entries(data.meals).forEach(([k,v])=>{sv('meals_'+k,v);count++})}
@@ -490,9 +511,9 @@ function importData(){
     if(data.antojos){Object.entries(data.antojos).forEach(([k,v])=>{sv('antojos_'+k,v)})}
     document.getElementById('import-json').value='';
     document.getElementById('import-area').classList.remove('open');
-    alert('✓ Datos importados correctamente. '+count+' días restaurados.');
+    showToast('✓ '+count+' días restaurados');
     renderHistory();
-  }catch(e){alert('Error al leer el JSON. Asegúrate de pegar el archivo completo sin modificar.')}
+  }catch(e){showToast('Error al leer el JSON')}
 }
 
 
@@ -601,7 +622,7 @@ function addPantryItem() {
     qty: document.getElementById('pantry-qty').value.trim() || '—',
     cat: document.getElementById('pantry-cat').value,
     days: parseInt(document.getElementById('pantry-days').value) || null,
-    added: new Date().toISOString().split('T')[0],
+    added: getLocalDateKey(),
     active: true
   });
   sv('pantry_items', items);
@@ -651,6 +672,13 @@ function renderPantry() {
   }).join('');
 }
 
+
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
 </script>
+<div class="toast" id="toast"></div>
 </body>
 </html>
