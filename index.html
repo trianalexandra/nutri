@@ -41,16 +41,20 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .meal-status{font-size:12px;padding:3px 8px;border-radius:20px;font-weight:500}
 .meal-status.empty{background:var(--sand);color:var(--ink-light)}
 .meal-status.done{background:var(--sage-light);color:var(--sage)}
+.meal-preview{font-size:13px;color:var(--ink-mid);padding:0 14px 6px;background:var(--white);display:none}
+.meal-slot.has-entry .meal-preview{display:block}
+.meal-actions{display:none;gap:6px;padding:0 14px 10px;background:var(--white)}
+.meal-slot.has-entry .meal-actions{display:flex}
+.meal-action-btn{padding:4px 10px;border-radius:20px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--sand);color:var(--ink-mid);transition:all 0.15s}
+.meal-action-btn.edit:hover{background:var(--sage-light);border-color:var(--sage);color:var(--sage)}
+.meal-action-btn.del:hover{background:#ffe0e0;border-color:#f0b0b0;color:#c43030}
 .meal-input-area{padding:12px 14px;border-top:1px solid var(--border);display:none;background:var(--sand)}
 .meal-slot.open .meal-input-area{display:block}
 .meal-input-area textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--white);resize:none;min-height:70px;outline:none}
 .meal-input-area textarea:focus{border-color:var(--sage)}
 .meal-save-btn{margin-top:8px;width:100%;padding:10px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:opacity 0.15s}
 .meal-save-btn:hover{opacity:.88}
-.meal-preview{font-size:13px;color:var(--ink-mid);padding:0 14px 10px;background:var(--white);display:none}
-.meal-slot.has-entry .meal-preview{display:block}
 .antojo-btn{width:100%;padding:14px;background:var(--clay-light);border:1.5px solid #e8c4b0;border-radius:var(--radius);color:var(--clay);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;cursor:pointer;text-align:left;margin-bottom:14px;transition:background 0.15s}
-.antojo-btn:hover{background:#f0d8cc}
 .antojo-panel{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px;display:none}
 .antojo-panel.open{display:block}
 .antojo-panel textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:14px;color:var(--ink);background:var(--sand);resize:none;min-height:80px;outline:none;margin-bottom:10px}
@@ -58,7 +62,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .antojo-chip{padding:5px 12px;border:1px solid var(--border);border-radius:20px;font-size:12px;background:var(--sand);cursor:pointer;transition:all 0.15s;color:var(--ink-mid)}
 .antojo-chip.selected{background:var(--clay-light);border-color:var(--clay);color:var(--clay)}
 .analyze-btn{width:100%;padding:14px;background:var(--ink);color:var(--white);border:none;border-radius:var(--radius);font-family:'DM Serif Display',serif;font-size:17px;cursor:pointer;transition:opacity 0.15s;margin-bottom:14px}
-.analyze-btn:hover{opacity:.85}
 .analyze-btn:disabled{opacity:.5;cursor:not-allowed}
 .analysis-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;display:none;margin-bottom:14px}
 .analysis-card.open{display:block}
@@ -69,6 +72,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .dot-pulse span:nth-child(3){animation-delay:.4s}
 @keyframes pulse{0%,80%,100%{opacity:.2}40%{opacity:1}}
 .analysis-text{font-size:14px;line-height:1.7;color:var(--ink-mid);white-space:pre-wrap}
+.export-bar{display:flex;gap:8px;margin-bottom:14px}
+.export-btn{flex:1;padding:11px 10px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;border:1.5px solid var(--border)}
+.export-btn.primary{background:var(--sage);color:var(--white);border-color:var(--sage)}
+.export-btn.secondary{background:var(--white);color:var(--ink-mid)}
+.import-area{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;display:none}
+.import-area.open{display:block}
+.import-area textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);background:var(--sand);resize:none;min-height:80px;outline:none;margin-bottom:8px}
 .history-day{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px 18px;margin-bottom:10px}
 .history-day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .history-date{font-weight:500;font-size:14px}
@@ -78,10 +88,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .history-meal-name{color:var(--ink-light);min-width:80px}
 .empty-state{text-align:center;padding:40px 20px;color:var(--ink-light);font-size:14px}
 .empty-state .big{font-family:'DM Serif Display',serif;font-size:40px;margin-bottom:8px}
-.ideas-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;padding-left:2px}
+.ideas-section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
 .idea-category-title{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light)}
-.refresh-btn{display:flex;align-items:center;gap:4px;background:var(--sage-light);border:1px solid var(--sage-mid);color:var(--sage);border-radius:20px;padding:4px 10px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer;transition:all 0.15s}
-.refresh-btn:hover{background:var(--sage);color:var(--white)}
+.refresh-btn{display:flex;align-items:center;gap:4px;background:var(--sage-light);border:1px solid var(--sage-mid);color:var(--sage);border-radius:20px;padding:4px 10px;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:500;cursor:pointer}
 .refresh-btn:disabled{opacity:.5;cursor:not-allowed}
 .idea-category{margin-bottom:20px}
 .idea-cards{display:flex;flex-direction:column;gap:6px}
@@ -94,18 +103,6 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .tag-finde{background:var(--clay-light);color:var(--clay)}
 .ideas-loading{text-align:center;padding:20px;color:var(--ink-light);font-size:13px}
 .cycle-banner{background:var(--warn-light);border:1px solid #f0d090;border-radius:var(--radius-sm);padding:12px 14px;margin-bottom:16px;font-size:13px;color:var(--warn)}
-
-.export-bar{display:flex;gap:8px;margin-bottom:14px}
-.export-btn{flex:1;padding:11px 10px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;transition:all 0.15s;border:1.5px solid var(--border)}
-.export-btn.primary{background:var(--sage);color:var(--white);border-color:var(--sage)}
-.export-btn.secondary{background:var(--white);color:var(--ink-mid)}
-.export-btn:hover.primary{opacity:.88}
-.export-btn:hover.secondary{background:var(--sand)}
-.import-area{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;display:none}
-.import-area.open{display:block}
-.import-area textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);background:var(--sand);resize:none;min-height:80px;outline:none;margin-bottom:8px}
-
-/* COMPRAS */
 .budget-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
 .budget-row{display:flex;gap:10px;align-items:flex-end;margin-bottom:14px}
 .budget-input-wrap{flex:1}
@@ -113,10 +110,9 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .budget-input{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink);background:var(--sand);outline:none}
 .budget-input:focus{border-color:var(--sage)}
 .period-btns{display:flex;gap:6px}
-.period-btn{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--ink-light);background:var(--white);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.period-btn{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--ink-light);background:var(--white);cursor:pointer;white-space:nowrap}
 .period-btn.active{background:var(--sage-light);border-color:var(--sage);color:var(--sage)}
-.generate-btn{width:100%;padding:13px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Serif Display',serif;font-size:16px;cursor:pointer;transition:opacity 0.15s}
-.generate-btn:hover{opacity:.88}
+.generate-btn{width:100%;padding:13px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Serif Display',serif;font-size:16px;cursor:pointer}
 .generate-btn:disabled{opacity:.5;cursor:not-allowed}
 .shopping-list{margin-bottom:14px;display:none}
 .shopping-list.open{display:block}
@@ -129,10 +125,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .badge-ambos{background:var(--warn-light);color:var(--warn)}
 .shop-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
 .shop-item:last-child{border-bottom:none;padding-bottom:0}
-.shop-checkbox{width:18px;height:18px;min-width:18px;border:1.5px solid var(--sage-mid);border-radius:4px;cursor:pointer;appearance:none;background:var(--white);margin-top:1px;transition:all 0.15s}
+.shop-checkbox{width:18px;height:18px;min-width:18px;border:1.5px solid var(--sage-mid);border-radius:4px;cursor:pointer;appearance:none;background:var(--white);margin-top:1px}
 .shop-checkbox:checked{background:var(--sage);border-color:var(--sage)}
 .shop-item-info{flex:1}
-.shop-item-name{font-size:14px;font-weight:500;transition:color 0.15s}
+.shop-item-name{font-size:14px;font-weight:500}
 .shop-item.checked .shop-item-name{text-decoration:line-through;color:var(--ink-light)}
 .shop-item-detail{font-size:12px;color:var(--ink-light);margin-top:2px}
 .shop-item-price{font-size:12px;font-weight:500;color:var(--sage);white-space:nowrap}
@@ -140,16 +136,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .shop-total-label{font-size:13px;color:var(--sage)}
 .shop-total-amount{font-family:'DM Serif Display',serif;font-size:20px;color:var(--sage)}
 .shop-loading{text-align:center;padding:24px;color:var(--ink-light);font-size:14px}
-
-/* INVENTARIO */
 .pantry-section{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
 .pantry-add-form{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
 .pantry-add-form.open{display:block}
 .pantry-form-row{display:flex;gap:8px;margin-bottom:8px}
 .pantry-input{flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--sand);outline:none}
-.pantry-input:focus{border-color:var(--sage)}
 .pantry-select{flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--sand);outline:none}
-.pantry-add-btn{padding:9px 16px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer}
 .pantry-items{display:flex;flex-direction:column;gap:6px;margin-top:12px}
 .pantry-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--sand);border-radius:var(--radius-sm);border:1px solid var(--border)}
 .pantry-item.expiring{background:#fff8e8;border-color:#f0d090}
@@ -161,9 +153,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .badge-ok{background:var(--sage-light);color:var(--sage)}
 .badge-soon{background:var(--warn-light);color:var(--warn)}
 .badge-expired{background:#ffe0e0;color:#c43030}
-.pantry-delete{background:none;border:none;color:var(--ink-light);cursor:pointer;font-size:16px;padding:2px 4px;line-height:1}
+.pantry-delete{background:none;border:none;color:var(--ink-light);cursor:pointer;font-size:18px;padding:2px 6px}
 .toggle-form-btn{font-size:13px;color:var(--sage);background:none;border:1px solid var(--sage-mid);border-radius:20px;padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500}
-
 .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--white);padding:10px 20px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:all 0.3s;pointer-events:none;z-index:999;white-space:nowrap}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 </style>
@@ -197,43 +188,12 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
     </div>
     <div id="water-reset-wrap"><button class="water-reset" onclick="showResetConfirm()">Reiniciar</button></div>
   </div>
+
   <div class="card" style="padding:14px">
     <div class="card-label" style="padding:0 4px 2px">🍽️ Comidas de hoy</div>
-    <div class="meal-slots">
-      <div class="meal-slot" id="slot-desayuno">
-        <div class="meal-slot-header" onclick="toggleSlot('desayuno')">
-          <div class="meal-slot-left"><div class="meal-emoji">🥣</div><div><div class="meal-name">Desayuno</div><div class="meal-time">7:00 – 9:00am</div></div></div>
-          <div class="meal-status empty" id="status-desayuno">pendiente</div>
-        </div>
-        <div class="meal-preview" id="preview-desayuno"></div>
-        <div class="meal-input-area"><textarea id="input-desayuno" placeholder="Ej: avena con leche de avena + plátano, o no desayuné..."></textarea><button class="meal-save-btn" onclick="saveMeal('desayuno')">Guardar</button></div>
-      </div>
-      <div class="meal-slot" id="slot-almuerzo">
-        <div class="meal-slot-header" onclick="toggleSlot('almuerzo')">
-          <div class="meal-slot-left"><div class="meal-emoji">🍱</div><div><div class="meal-name">Almuerzo</div><div class="meal-time">12:00 – 2:00pm</div></div></div>
-          <div class="meal-status empty" id="status-almuerzo">pendiente</div>
-        </div>
-        <div class="meal-preview" id="preview-almuerzo"></div>
-        <div class="meal-input-area"><textarea id="input-almuerzo" placeholder="Ej: pollo con camote y ensalada, o menú del restó..."></textarea><button class="meal-save-btn" onclick="saveMeal('almuerzo')">Guardar</button></div>
-      </div>
-      <div class="meal-slot" id="slot-colacion">
-        <div class="meal-slot-header" onclick="toggleSlot('colacion')">
-          <div class="meal-slot-left"><div class="meal-emoji">🍌</div><div><div class="meal-name">Colación pre-pole</div><div class="meal-time">5:30pm aprox.</div></div></div>
-          <div class="meal-status empty" id="status-colacion">pendiente</div>
-        </div>
-        <div class="meal-preview" id="preview-colacion"></div>
-        <div class="meal-input-area"><textarea id="input-colacion" placeholder="Ej: plátano + maní, o tostada con mantequilla de maní..."></textarea><button class="meal-save-btn" onclick="saveMeal('colacion')">Guardar</button></div>
-      </div>
-      <div class="meal-slot" id="slot-cena">
-        <div class="meal-slot-header" onclick="toggleSlot('cena')">
-          <div class="meal-slot-left"><div class="meal-emoji">🌙</div><div><div class="meal-name">Cena post-pole</div><div class="meal-time">9:00 – 10:30pm</div></div></div>
-          <div class="meal-status empty" id="status-cena">pendiente</div>
-        </div>
-        <div class="meal-preview" id="preview-cena"></div>
-        <div class="meal-input-area"><textarea id="input-cena" placeholder="Ej: tortilla de 2 huevos + ensalada, o atún con palta..."></textarea><button class="meal-save-btn" onclick="saveMeal('cena')">Guardar</button></div>
-      </div>
-    </div>
+    <div class="meal-slots" id="meal-slots-container"></div>
   </div>
+
   <button class="antojo-btn" onclick="toggleAntojo()">🍫 Tuve un antojo / caída</button>
   <div class="antojo-panel" id="antojo-panel">
     <div class="card-label">¿Qué tipo de antojo fue?</div>
@@ -248,9 +208,13 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
     <textarea id="antojo-text" placeholder="Cuéntame qué pasó... sin filtros"></textarea>
     <button class="meal-save-btn" style="background:var(--clay)" onclick="saveAntojo()">Registrar antojo</button>
   </div>
+
   <button class="analyze-btn" id="analyzeBtn" onclick="analyzeDay()">Analizar mi día ✦</button>
   <div class="analysis-card" id="analysis-card">
-    <div id="analysis-loading" class="analysis-loading" style="display:none"><div class="dot-pulse"><span></span><span></span><span></span></div>Analizando tu día...</div>
+    <div id="analysis-loading" class="analysis-loading" style="display:none">
+      <div class="dot-pulse"><span></span><span></span><span></span></div>
+      Analizando tu día...
+    </div>
     <div id="analysis-result"></div>
   </div>
 </div>
@@ -263,7 +227,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
   </div>
   <div class="import-area" id="import-area">
     <div class="card-label">Pega aquí el JSON exportado previamente</div>
-    <textarea id="import-json" placeholder='{"meals":[...],"water":[...],...}'></textarea>
+    <textarea id="import-json" placeholder='{"meals":{...},"water":{...},...}'></textarea>
     <button class="meal-save-btn" onclick="importData()">Importar y restaurar</button>
   </div>
   <div id="history-content"></div>
@@ -272,75 +236,69 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 <!-- IDEAS -->
 <div class="section" id="tab-ideas">
   <div class="cycle-banner">🔄 <strong>Ciclo de meal prep con Andrés:</strong> cambiar el plato base cada 2 semanas. Misma rutina de compra y cocina, distinto ingrediente principal.</div>
-
   <div class="idea-category">
     <div class="ideas-section-header">
       <div class="idea-category-title">🥣 Desayunos rápidos</div>
       <button class="refresh-btn" onclick="refreshIdeas('desayunos',this)">↻ Nuevas ideas</button>
     </div>
     <div class="idea-cards" id="ideas-desayunos">
-      <div class="idea-card"><div class="idea-title">Avena con leche de avena + fruta</div><div class="idea-detail">Avena en hojuelas + leche de avena o almendras + plátano o fresa. Agrega 1 cdta mantequilla de maní para proteína.</div><span class="idea-tag tag-rapido">5 min</span></div>
-      <div class="idea-card"><div class="idea-title">2 huevos revueltos + tostada + palta</div><div class="idea-detail">La palta da grasa buena que sostiene hasta el almuerzo sin pico de hambre. Clásico infalible.</div><span class="idea-tag tag-rapido">8 min</span></div>
-      <div class="idea-card"><div class="idea-title">Pan integral con pavo + palta (Tambo/panadería)</div><div class="idea-detail">Para días que vas al trabajo. Evita mayonesa o cremas. Pide que pongan palta si tienen.</div><span class="idea-tag tag-rapido">De camino</span></div>
-      <div class="idea-card"><div class="idea-title">Yogur vegetal + granola + fruta</div><div class="idea-detail">Yogur de coco o soya (Wong, Plaza Vea) + granola sin azúcar + fruta de temporada. Sin cocinar.</div><span class="idea-tag tag-rapido">0 min</span></div>
+      <div class="idea-card"><div class="idea-title">Avena con leche de avena + fruta</div><div class="idea-detail">Avena en hojuelas + leche de avena o almendras + plátano o fresa. 1 cdta mantequilla de maní para proteína.</div><span class="idea-tag tag-rapido">5 min</span></div>
+      <div class="idea-card"><div class="idea-title">2 huevos revueltos + tostada + palta</div><div class="idea-detail">La palta da grasa buena que sostiene hasta el almuerzo sin pico de hambre.</div><span class="idea-tag tag-rapido">8 min</span></div>
+      <div class="idea-card"><div class="idea-title">Pan integral con pavo + palta</div><div class="idea-detail">Para días de trabajo. Tambo o panadería. Evita mayonesa o cremas.</div><span class="idea-tag tag-rapido">De camino</span></div>
+      <div class="idea-card"><div class="idea-title">Yogur vegetal + granola + fruta</div><div class="idea-detail">Yogur de coco o soya (Wong, Plaza Vea) + granola sin azúcar + fruta. Sin cocinar.</div><span class="idea-tag tag-rapido">0 min</span></div>
     </div>
   </div>
-
   <div class="idea-category">
     <div class="ideas-section-header">
       <div class="idea-category-title">🍱 Meal prep · rotación 2 semanas</div>
       <button class="refresh-btn" onclick="refreshIdeas('mealprep',this)">↻ Nuevas ideas</button>
     </div>
     <div class="idea-cards" id="ideas-mealprep">
-      <div class="idea-card"><div class="idea-title">Semana A — Pollo al horno + quinua</div><div class="idea-detail">Cambia el frito por horneado (ajo, paprika, limón). Quinua en vez de arroz tiene más proteína. Aliños rotativos: tahini+limón / sillao+jengibre / mostaza sin azúcar.</div><span class="idea-tag tag-mealprep">Prep 45 min</span></div>
-      <div class="idea-card"><div class="idea-title">Semana B — Pescado al horno + camote</div><div class="idea-detail">Jurel o caballa al horno (económico, omega-3). Con camote y brócoli. Los aliños hacen que sepa diferente cada día sin recocinar.</div><span class="idea-tag tag-mealprep">Prep 35 min</span></div>
-      <div class="idea-card"><div class="idea-title">Semana C — Base de menestras</div><div class="idea-detail">Lentejas o garbanzos guisados (Andrés cocina una vez, rinde la semana). Alta en fibra: digestión lenta, sin sueño postalmuerzo, sin hambre rápida.</div><span class="idea-tag tag-mealprep">Prep 30 min</span></div>
-      <div class="idea-card"><div class="idea-title">Truco aliños: varía el sabor sin recocinar</div><div class="idea-detail">Prepara 2–3 aliños el domingo en frasquitos: tahini+limón / sillao+jengibre+ajo / vinagre balsámico+orégano / huacatay+aceite de oliva.</div><span class="idea-tag tag-mealprep">Truco</span></div>
+      <div class="idea-card"><div class="idea-title">Semana A — Pollo al horno + quinua</div><div class="idea-detail">Horneado con ajo, paprika, limón. Quinua tiene más proteína que el arroz. Aliños: tahini+limón / sillao+jengibre / mostaza.</div><span class="idea-tag tag-mealprep">Prep 45 min</span></div>
+      <div class="idea-card"><div class="idea-title">Semana B — Pescado al horno + camote</div><div class="idea-detail">Jurel o caballa al horno (económico, omega-3). Con camote y brócoli. Los aliños hacen que sepa diferente cada día.</div><span class="idea-tag tag-mealprep">Prep 35 min</span></div>
+      <div class="idea-card"><div class="idea-title">Semana C — Base de menestras</div><div class="idea-detail">Lentejas o garbanzos guisados. Alta en fibra: digestión lenta, sin sueño postalmuerzo.</div><span class="idea-tag tag-mealprep">Prep 30 min</span></div>
+      <div class="idea-card"><div class="idea-title">Truco: varía el sabor sin recocinar</div><div class="idea-detail">Prepara 2–3 aliños el domingo en frasquitos: tahini+limón / sillao+jengibre / vinagre balsámico / huacatay+aceite.</div><span class="idea-tag tag-mealprep">Truco</span></div>
     </div>
   </div>
-
   <div class="idea-category">
     <div class="ideas-section-header">
       <div class="idea-category-title">🍌 Colaciones pre-pole</div>
       <button class="refresh-btn" onclick="refreshIdeas('colaciones',this)">↻ Nuevas ideas</button>
     </div>
     <div class="idea-cards" id="ideas-colaciones">
-      <div class="idea-card"><div class="idea-title">Plátano + maní tostado sin sal</div><div class="idea-detail">Carbohidrato rápido + proteína/grasa para sostener. Ideal 60–90 min antes del pole.</div><span class="idea-tag tag-rapido">Sin cocinar</span></div>
-      <div class="idea-card"><div class="idea-title">Tostada integral + mantequilla de maní</div><div class="idea-detail">Agrega rodajas de plátano encima para más energía disponible en clase.</div><span class="idea-tag tag-rapido">2 min</span></div>
-      <div class="idea-card"><div class="idea-title">Dátiles + nueces o almendras</div><div class="idea-detail">Portátil para llevar al estudio. Dulce natural sin pico de insulina. 3 dátiles + puñado de nueces.</div><span class="idea-tag tag-rapido">0 min</span></div>
-      <div class="idea-card"><div class="idea-title">Fruta + puñado de almendras</div><div class="idea-detail">Manzana, pera o mandarina + almendras. Fácil de llevar, sin preparación, sin refrigeración.</div><span class="idea-tag tag-rapido">0 min</span></div>
+      <div class="idea-card"><div class="idea-title">Plátano + maní tostado sin sal</div><div class="idea-detail">Ideal 60–90 min antes del pole. Carbohidrato rápido + proteína para sostener.</div><span class="idea-tag tag-rapido">Sin cocinar</span></div>
+      <div class="idea-card"><div class="idea-title">Tostada integral + mantequilla de maní</div><div class="idea-detail">Agrega rodajas de plátano encima para más energía en clase.</div><span class="idea-tag tag-rapido">2 min</span></div>
+      <div class="idea-card"><div class="idea-title">Dátiles + nueces o almendras</div><div class="idea-detail">Portátil para llevar al estudio. 3 dátiles + puñado de nueces.</div><span class="idea-tag tag-rapido">0 min</span></div>
+      <div class="idea-card"><div class="idea-title">Fruta + almendras</div><div class="idea-detail">Manzana, pera o mandarina + almendras. Sin preparación ni refrigeración.</div><span class="idea-tag tag-rapido">0 min</span></div>
     </div>
   </div>
-
   <div class="idea-category">
     <div class="ideas-section-header">
-      <div class="idea-category-title">🌙 Cenas post-pole (ligeras y recuperadoras)</div>
+      <div class="idea-category-title">🌙 Cenas post-pole</div>
       <button class="refresh-btn" onclick="refreshIdeas('cenas',this)">↻ Nuevas ideas</button>
     </div>
     <div class="idea-cards" id="ideas-cenas">
-      <div class="idea-card"><div class="idea-title">Tortilla de 2–3 huevos + ensalada</div><div class="idea-detail">Proteína completa, fácil de digerir, 8 min. Ensalada de tomate + pepino + aceite de oliva. Sin carbohidrato pesado a esta hora.</div><span class="idea-tag tag-rapido">8 min</span></div>
-      <div class="idea-card"><div class="idea-title">Atún al natural + palta + ensalada</div><div class="idea-detail">Sin cocinar. Atún en agua (no en aceite) + palta en cubos + tomate cherry + limón + sal. Proteína y grasa buena para recuperación post-pole.</div><span class="idea-tag tag-rapido">0 min</span></div>
-      <div class="idea-card"><div class="idea-title">Pollo desmenuzado del meal prep + verduras salteadas</div><div class="idea-detail">Usa el pollo del meal prep. Saltea zucchini, brócoli o espinaca con ajo y aceite. 10 min. Sin arroz — el músculo se recupera con proteína, no carbohidrato a las 10pm.</div><span class="idea-tag tag-rapido">10 min</span></div>
-      <div class="idea-card"><div class="idea-title">Sopa de verduras + pollo desmenuzado</div><div class="idea-detail">Si tienes caldo preparado del finde: calienta + zanahoria, zapallo, espinaca + pollo desmenuzado. Liviana, reconfortante, frena los antojos nocturnos.</div><span class="idea-tag tag-rapido">10 min</span></div>
+      <div class="idea-card"><div class="idea-title">Tortilla de 2–3 huevos + ensalada</div><div class="idea-detail">Proteína completa, fácil de digerir, 8 min. Tomate + pepino + aceite de oliva.</div><span class="idea-tag tag-rapido">8 min</span></div>
+      <div class="idea-card"><div class="idea-title">Atún al natural + palta + ensalada</div><div class="idea-detail">Sin cocinar. Atún en agua + palta + tomate cherry + limón. Recuperación post-pole.</div><span class="idea-tag tag-rapido">0 min</span></div>
+      <div class="idea-card"><div class="idea-title">Pollo del meal prep + verduras salteadas</div><div class="idea-detail">Saltea zucchini, brócoli o espinaca con ajo y aceite. 10 min. Sin arroz a esta hora.</div><span class="idea-tag tag-rapido">10 min</span></div>
+      <div class="idea-card"><div class="idea-title">Sopa liviana + pollo desmenuzado</div><div class="idea-detail">Caldo + zanahoria, zapallo, espinaca + pollo del meal prep. Frena antojos nocturnos.</div><span class="idea-tag tag-rapido">10 min</span></div>
     </div>
   </div>
-
   <div class="idea-category">
     <div class="ideas-section-header">
       <div class="idea-category-title">🍫 Finde y antojos nocturnos</div>
       <button class="refresh-btn" onclick="refreshIdeas('finde',this)">↻ Nuevas ideas</button>
     </div>
     <div class="idea-cards" id="ideas-finde">
-      <div class="idea-card"><div class="idea-title">El finde es para salir del meal prep, no del plan</div><div class="idea-detail">Ceviche, lomo saltado, pollo a la brasa — todos son compatibles si cuidas las salsas. Siempre pide la salsa aparte.</div><span class="idea-tag tag-finde">Mindset</span></div>
-      <div class="idea-card"><div class="idea-title">Antojo nocturno — opciones concretas</div><div class="idea-detail">Chocolate amargo 70%+ (2 cuadros). Plátano con maní. Fruta con canela. Dátil relleno con almendra. No es aguantar — es elegir mejor.</div><span class="idea-tag tag-finde">Noche</span></div>
-      <div class="idea-card"><div class="idea-title">En restaurante sin romper el esquema</div><div class="idea-detail">Ceviche de pescado (sin crema), tiradito, causa con atún. Evita: causas con mayonesa, tequeños, papas fritas como plato principal.</div><span class="idea-tag tag-finde">Fuera</span></div>
+      <div class="idea-card"><div class="idea-title">El finde es para salir del meal prep, no del plan</div><div class="idea-detail">Ceviche, lomo saltado, pollo a la brasa — compatibles si cuidas las salsas. Siempre pide la salsa aparte.</div><span class="idea-tag tag-finde">Mindset</span></div>
+      <div class="idea-card"><div class="idea-title">Antojo nocturno — opciones concretas</div><div class="idea-detail">Chocolate amargo 70%+ (2 cuadros). Plátano con maní. Fruta con canela. Dátil con almendra.</div><span class="idea-tag tag-finde">Noche</span></div>
+      <div class="idea-card"><div class="idea-title">En restaurante sin romper el esquema</div><div class="idea-detail">Ceviche de pescado (sin crema), tiradito, causa con atún. Evita: causas con mayonesa, tequeños.</div><span class="idea-tag tag-finde">Fuera</span></div>
     </div>
   </div>
 </div>
 
 <!-- COMPRAS -->
 <div class="section" id="tab-compras">
-
   <div class="budget-card">
     <div class="card-label">💰 Presupuesto de despensa personal</div>
     <div class="budget-row">
@@ -358,12 +316,10 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
     </div>
     <button class="generate-btn" id="generateBtn" onclick="generateShoppingList()">Generar lista de compras ✦</button>
   </div>
-
   <div class="shopping-list" id="shopping-list">
     <div id="shop-total-bar"></div>
     <div id="shop-categories"></div>
   </div>
-
   <div class="pantry-section">
     <div class="card-label" style="margin-bottom:0">🧺 Lo que tengo en casa</div>
     <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
@@ -372,8 +328,8 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
     </div>
     <div class="pantry-add-form" id="pantry-form">
       <div class="pantry-form-row">
-        <input class="pantry-input" id="pantry-name" placeholder="Ej: Palta, Huevos, Avena..." style="flex:2">
-        <input class="pantry-input" id="pantry-qty" placeholder="Cant. (Ej: 6 u, 500g)" style="flex:1">
+        <input class="pantry-input" id="pantry-name" placeholder="Ej: Palta, Huevos..." style="flex:2">
+        <input class="pantry-input" id="pantry-qty" placeholder="Cant. (Ej: 6 u)" style="flex:1">
       </div>
       <div class="pantry-form-row">
         <select class="pantry-select" id="pantry-cat">
@@ -384,301 +340,426 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
         </select>
         <input class="pantry-input" id="pantry-days" type="number" placeholder="Días que dura" min="1" max="365">
       </div>
-      <button class="pantry-add-btn" onclick="addPantryItem()" style="width:100%">Guardar en inventario</button>
+      <button class="meal-save-btn" onclick="addPantryItem()">Guardar en inventario</button>
     </div>
     <div class="pantry-items" id="pantry-items"></div>
   </div>
-
 </div>
 
 </div>
+<div class="toast" id="toast"></div>
+
 <script>
+// ─── UTILS ───────────────────────────────────────────────
 function getLocalDateKey() {
-  const lima = new Date(new Date().toLocaleString('en-US', {timeZone:'America/Lima'}));
-  const y = lima.getFullYear();
-  const m = String(lima.getMonth()+1).padStart(2,'0');
-  const d = String(lima.getDate()).padStart(2,'0');
+  var lima = new Date(new Date().toLocaleString('en-US', {timeZone:'America/Lima'}));
+  var y = lima.getFullYear();
+  var m = String(lima.getMonth()+1).padStart(2,'0');
+  var d = String(lima.getDate()).padStart(2,'0');
   return y+'-'+m+'-'+d;
 }
-const todayKey = getLocalDateKey();
+function ld(k,fb) { try { var v=localStorage.getItem(k); return v!==null?JSON.parse(v):fb; } catch(e) { return fb; } }
+function sv(k,v) { try { localStorage.setItem(k,JSON.stringify(v)); } catch(e) {} }
+function showToast(msg) {
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); },2200);
+}
+function historialIsActive() {
+  return document.getElementById('tab-historial').classList.contains('active');
+}
+
+var todayKey = getLocalDateKey();
 document.getElementById('todayDate').textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long',timeZone:'America/Lima'});
 setInterval(function(){ if(getLocalDateKey()!==todayKey) location.reload(); }, 60000);
-function ld(k,fb){try{const v=localStorage.getItem(k);return v!==null?JSON.parse(v):fb}catch{return fb}}
-function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}
 
-let water=ld('water_'+todayKey,0);
-function renderWater(){document.getElementById('waterDisplay').textContent=water;document.getElementById('waterBar').style.width=Math.min((water/1500)*100,100)+'%'}
-function addWater(ml){water+=ml;sv('water_'+todayKey,water);renderWater()}
-function showResetConfirm(){
-  document.getElementById('water-reset-wrap').innerHTML=
-    '<div style="display:flex;gap:8px;margin-top:8px">'+
-    '<button class="water-reset" style="color:var(--clay)" onclick="resetWater()">Sí, reiniciar</button>'+
-    '<button class="water-reset" onclick="cancelReset()">Cancelar</button>'+
+// ─── MEAL SLOTS ───────────────────────────────────────────
+var MEALS = [
+  {id:'desayuno', emoji:'🥣', label:'Desayuno', time:'7:00 – 9:00am', ph:'Ej: avena con leche de avena + plátano, o no desayuné...'},
+  {id:'almuerzo', emoji:'🍱', label:'Almuerzo', time:'12:00 – 2:00pm', ph:'Ej: pollo con camote y ensalada, o menú del restó...'},
+  {id:'colacion', emoji:'🍌', label:'Colación pre-pole', time:'5:30pm aprox.', ph:'Ej: plátano + maní, o tostada con mantequilla de maní...'},
+  {id:'cena',     emoji:'🌙', label:'Cena post-pole', time:'9:00 – 10:30pm', ph:'Ej: tortilla de 2 huevos + ensalada, o atún con palta...'}
+];
+
+function buildMealSlots() {
+  var html = '';
+  MEALS.forEach(function(m) {
+    html += '<div class="meal-slot" id="slot-'+m.id+'">' +
+      '<div class="meal-slot-header" onclick="toggleSlot(\''+m.id+'\')">' +
+        '<div class="meal-slot-left"><div class="meal-emoji">'+m.emoji+'</div>' +
+          '<div><div class="meal-name">'+m.label+'</div><div class="meal-time">'+m.time+'</div></div></div>' +
+        '<div class="meal-status empty" id="status-'+m.id+'">pendiente</div>' +
+      '</div>' +
+      '<div class="meal-preview" id="preview-'+m.id+'"></div>' +
+      '<div class="meal-actions" id="actions-'+m.id+'">' +
+        '<button class="meal-action-btn edit" onclick="editMeal(\''+m.id+'\')">✏ Editar</button>' +
+        '<button class="meal-action-btn del" onclick="deleteMeal(\''+m.id+'\')">× Borrar</button>' +
+      '</div>' +
+      '<div class="meal-input-area" id="input-area-'+m.id+'">' +
+        '<textarea id="input-'+m.id+'" placeholder="'+m.ph+'"></textarea>' +
+        '<button class="meal-save-btn" onclick="saveMeal(\''+m.id+'\')">Guardar</button>' +
+      '</div>' +
     '</div>';
-}
-function cancelReset(){
-  document.getElementById('water-reset-wrap').innerHTML='<button class="water-reset" onclick="showResetConfirm()">Reiniciar</button>';
-}
-function resetWater(){water=0;sv('water_'+todayKey,0);renderWater();cancelReset();}
-renderWater();
-
-const meals=ld('meals_'+todayKey,{desayuno:'',almuerzo:'',colacion:'',cena:''});
-const antojos=ld('antojos_'+todayKey,[]);
-function renderMeals(){['desayuno','almuerzo','colacion','cena'].forEach(m=>{const slot=document.getElementById('slot-'+m),status=document.getElementById('status-'+m),preview=document.getElementById('preview-'+m),input=document.getElementById('input-'+m);if(meals[m]){slot.classList.add('has-entry');status.textContent='✓ registrado';status.className='meal-status done';preview.textContent=meals[m].length>60?meals[m].slice(0,60)+'...':meals[m];if(input)input.value=meals[m]}else{slot.classList.remove('has-entry');status.textContent='pendiente';status.className='meal-status empty';preview.textContent=''}})}
-function toggleSlot(n){const s=document.getElementById('slot-'+n),o=s.classList.contains('open');document.querySelectorAll('.meal-slot').forEach(x=>x.classList.remove('open'));if(!o)s.classList.add('open')}
-function saveMeal(n){const v=document.getElementById('input-'+n).value.trim();if(!v)return;meals[n]=v;sv('meals_'+todayKey,meals);document.getElementById('slot-'+n).classList.remove('open');renderMeals()}
-renderMeals();
-renderPantry();
-function toggleAntojo(){document.getElementById('antojo-panel').classList.toggle('open')}
-function toggleChip(el){el.classList.toggle('selected')}
-function saveAntojo(){const text=document.getElementById('antojo-text').value.trim();const chips=[...document.querySelectorAll('.antojo-chip.selected')].map(c=>c.textContent);if(!text&&chips.length===0)return;antojos.push({time:new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),tipos:chips,texto:text});sv('antojos_'+todayKey,antojos);document.getElementById('antojo-text').value='';document.querySelectorAll('.antojo-chip').forEach(c=>c.classList.remove('selected'));document.getElementById('antojo-panel').classList.remove('open');showToast('Antojo registrado ✓');}
-function showTab(n,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));document.getElementById('tab-'+n).classList.add('active');btn.classList.add('active');if(n==='historial')renderHistory()}
-function renderHistory(){const c=document.getElementById('history-content');const days=[];for(let i=0;i<14;i++){const base=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));base.setDate(base.getDate()-i);const y=base.getFullYear(),mo=String(base.getMonth()+1).padStart(2,'0'),dd=String(base.getDate()).padStart(2,'0');const k=`${y}-${mo}-${dd}`;const d=base;const m=ld('meals_'+k,null);const w=ld('water_'+k,0);const a=ld('antojos_'+k,[]);if(m&&Object.values(m).some(v=>v))days.push({date:d,meals:m,water:w,antojos:a})}if(days.length===0){c.innerHTML='<div class="empty-state"><div class="big">📋</div>Aún no hay historial.<br>Empieza registrando hoy.</div>';return}const mn={desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación',cena:'Cena'};c.innerHTML=days.map(d=>{const ds=d.date.toLocaleDateString('es-PE',{weekday:'short',day:'numeric',month:'short'});const f=Object.values(d.meals).filter(v=>v).length;const p=Math.round((f/4)*100);const sc=p>=75?'var(--sage)':p>=50?'var(--warn)':'var(--clay)';const mr=Object.entries(d.meals).filter(([,v])=>v).map(([k,v])=>`<div class="history-meal-row"><span class="history-meal-name">${mn[k]}</span><span>${v.length>45?v.slice(0,45)+'…':v}</span></div>`).join('');const an=d.antojos.length>0?`<div style="margin-top:8px;font-size:12px;color:var(--clay)">🍫 ${d.antojos.length} antojo(s)</div>`:'';return`<div class="history-day"><div class="history-day-header"><div class="history-date">${ds}</div><div class="history-score" style="background:${sc}22;color:${sc}">${f}/4 comidas</div></div><div class="history-meals">${mr}</div>${an}<div style="margin-top:4px;font-size:12px;color:var(--ink-light)">💧 ${d.water}ml</div></div>`}).join('')}
-
-const SECTION_PROMPTS={
-  desayunos:{label:'desayunos rápidos sin lactosa',note:'Sin lactosa. Máximo 10 min o sin cocinar. Ingredientes de mercado, Wong o Plaza Vea en Lima, Perú. Proteína + carbohidrato complejo para sostener energía hasta el almuerzo.'},
-  mealprep:{label:'opciones de meal prep semanal',note:'Para preparar el domingo. Proteína magra (NO frita: horneada, sancochada, guisada), carbohidrato complejo (camote, quinua, papa), digestión lenta, sin sueño postalmuerzo. Sin lactosa. Incluye variante de aliños para variar sabor sin recocinar.'},
-  colaciones:{label:'colaciones pre-entrenamiento de pole sport',note:'Para tomar 60-90 min antes de clase nocturna. Energía rápida y sostenida. Sin lactosa, sin cocinar o muy rápidas de preparar. Portátiles si es posible.'},
-  cenas:{label:'cenas post-entrenamiento nocturno (después de las 9pm)',note:'Altas en proteína, bajas en carbohidrato, de fácil digestión. Sin lactosa. Que no generen reflujo. Rápidas (menos de 15 min). Pensadas para recuperación muscular post-pole, no para dar energía.'},
-  finde:{label:'opciones de fin de semana y manejo de antojos nocturnos',note:'Opciones reales en restaurantes de Lima sin romper el plan. Opciones concretas para antojos dulces nocturnos (sin "aguantar" sino elegir mejor). Sin lactosa.'}
-};
-
-async function refreshIdeas(section,btn){
-  btn.disabled=true;
-  const container=document.getElementById('ideas-'+section);
-  container.innerHTML='<div class="ideas-loading">Generando nuevas ideas...</div>';
-  const info=SECTION_PROMPTS[section];
-  const prompt=`Eres una nutricionista especializada en nutrición peruana. Genera exactamente 4 ideas de ${info.label}.\n\nRestricciones: ${info.note}\n\nResponde SOLO con JSON válido sin texto extra ni backticks:\n[{"titulo":"...","detalle":"...","tag":"...","tagClass":"rapido"}]\n\ntagClass debe ser: rapido, mealprep, o finde. El detalle debe ser específico, útil y máx 2 líneas. Usa ingredientes reales de Lima, Perú.`;
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
-    const data=await res.json();
-    const raw=data.content?.[0]?.text||'[]';
-    const ideas=JSON.parse(raw.replace(/```json|```/g,'').trim());
-    container.innerHTML=ideas.map(i=>`<div class="idea-card"><div class="idea-title">${i.titulo}</div><div class="idea-detail">${i.detalle}</div><span class="idea-tag tag-${i.tagClass}">${i.tag}</span></div>`).join('');
-  }catch{container.innerHTML='<div class="idea-card"><div class="idea-detail" style="color:var(--clay)">No se pudo cargar. Revisa tu conexión e intenta de nuevo.</div></div>'}
-  btn.disabled=false;
+  });
+  document.getElementById('meal-slots-container').innerHTML = html;
 }
 
-async function analyzeDay(){
-  const btn=document.getElementById('analyzeBtn'),card=document.getElementById('analysis-card'),loading=document.getElementById('analysis-loading'),result=document.getElementById('analysis-result');
-  const m=ld('meals_'+todayKey,{});const mn={desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación pre-pole',cena:'Cena'};
-  const parts=Object.entries(mn).map(([k,n])=>`${n}: ${m[k]||'no registrado'}`);
-  parts.push(`Agua: ${ld('water_'+todayKey,0)}ml de 1500ml`);
-  const a=ld('antojos_'+todayKey,[]);
-  a.forEach(ant=>{const t=ant.tipos.length>0?`(${ant.tipos.join(', ')})`:'';parts.push(`Antojo a las ${ant.time} ${t}: ${ant.texto}`)});
-  const summary=parts.join('\n');
-  if(!Object.values(m).some(v=>v)){showToast('Registra al menos una comida primero');return}
-  btn.disabled=true;card.classList.add('open');loading.style.display='flex';result.innerHTML='';
-  const prompt=`Eres nutricionista de seguimiento. Paciente: Tri, mujer, 58.35kg, 1.53m, pole sport 2x/semana por las noches, TDAH, sin lactosa. Objetivo: reducir grasa abdominal. Meta agua: 1500ml/día. Puntos débiles: antojos nocturnos, come por impulso/aburrimiento, se aburre de lo mismo.\n\nRegistro de hoy:\n${summary}\n\nAnaliza brevemente (máx 180 palabras):\n✓ Qué estuvo bien (1-2 cosas concretas)\n⚠ Qué ajustar mañana (con alternativa concreta)\n💡 Un insight si hubo antojo o caída\n\nNo moralices. Tono directo y cercano. Segunda persona.`;
-  try{
-    const res=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
-    const data=await res.json();
-    const text=data.content?.[0]?.text||'No pude generar el análisis. Intenta de nuevo.';
-    loading.style.display='none';result.innerHTML=`<div class="analysis-text">${text}</div>`;
-  }catch{loading.style.display='none';result.innerHTML='<div class="analysis-text" style="color:var(--clay)">Error al conectar. Revisa tu conexión e intenta de nuevo.</div>'}
-  btn.disabled=false;
+var meals = ld('meals_'+todayKey, {desayuno:'',almuerzo:'',colacion:'',cena:''});
+var antojos = ld('antojos_'+todayKey, []);
+
+function renderMeals() {
+  MEALS.forEach(function(m) {
+    var slot    = document.getElementById('slot-'+m.id);
+    var status  = document.getElementById('status-'+m.id);
+    var preview = document.getElementById('preview-'+m.id);
+    var actions = document.getElementById('actions-'+m.id);
+    var input   = document.getElementById('input-'+m.id);
+    if (!slot) return;
+    if (meals[m.id]) {
+      slot.classList.add('has-entry');
+      status.textContent = '✓ registrado';
+      status.className = 'meal-status done';
+      preview.textContent = meals[m.id].length > 60 ? meals[m.id].slice(0,60)+'...' : meals[m.id];
+      if (input) input.value = meals[m.id];
+    } else {
+      slot.classList.remove('has-entry');
+      status.textContent = 'pendiente';
+      status.className = 'meal-status empty';
+      preview.textContent = '';
+    }
+  });
 }
 
-function exportData(){
-  const data={meals:{},water:{},antojos:{},exported_at:new Date().toISOString(),version:1};
-  for(let i=0;i<365;i++){
-    const d=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));d.setDate(d.getDate()-i);
-    const y=d.getFullYear(),mo=String(d.getMonth()+1).padStart(2,'0'),dd=String(d.getDate()).padStart(2,'0');const k=y+'-'+mo+'-'+dd;
-    const m=ld('meals_'+k,null);
-    const w=ld('water_'+k,0);
-    const a=ld('antojos_'+k,[]);
-    if(m&&Object.values(m).some(v=>v))data.meals[k]=m;
-    if(w>0)data.water[k]=w;
-    if(a.length>0)data.antojos[k]=a;
+function toggleSlot(n) {
+  var slot = document.getElementById('slot-'+n);
+  var isOpen = slot.classList.contains('open');
+  MEALS.forEach(function(m){ document.getElementById('slot-'+m.id).classList.remove('open'); });
+  if (!isOpen) slot.classList.add('open');
+}
+
+function saveMeal(n) {
+  var input = document.getElementById('input-'+n);
+  var v = input ? input.value.trim() : '';
+  if (!v) return;
+  meals[n] = v;
+  sv('meals_'+todayKey, meals);
+  document.getElementById('slot-'+n).classList.remove('open');
+  renderMeals();
+  if (historialIsActive()) renderHistory();
+}
+
+function editMeal(n) {
+  document.getElementById('slot-'+n).classList.add('open');
+  var input = document.getElementById('input-'+n);
+  if (input) { input.focus(); input.setSelectionRange(input.value.length, input.value.length); }
+}
+
+function deleteMeal(n) {
+  meals[n] = '';
+  sv('meals_'+todayKey, meals);
+  document.getElementById('slot-'+n).classList.remove('open');
+  renderMeals();
+  if (historialIsActive()) renderHistory();
+  showToast('Comida eliminada');
+}
+
+// ─── WATER ───────────────────────────────────────────────
+var water = ld('water_'+todayKey, 0);
+function renderWater() {
+  document.getElementById('waterDisplay').textContent = water;
+  document.getElementById('waterBar').style.width = Math.min((water/1500)*100,100)+'%';
+}
+function addWater(ml) {
+  water += ml;
+  sv('water_'+todayKey, water);
+  renderWater();
+  if (historialIsActive()) renderHistory();
+}
+function showResetConfirm() {
+  document.getElementById('water-reset-wrap').innerHTML =
+    '<div style="display:flex;gap:8px;margin-top:8px">' +
+    '<button class="water-reset" style="color:var(--clay)" onclick="resetWater()">Sí, reiniciar</button>' +
+    '<button class="water-reset" onclick="cancelReset()">Cancelar</button></div>';
+}
+function cancelReset() {
+  document.getElementById('water-reset-wrap').innerHTML = '<button class="water-reset" onclick="showResetConfirm()">Reiniciar</button>';
+}
+function resetWater() {
+  water = 0;
+  sv('water_'+todayKey, 0);
+  renderWater();
+  cancelReset();
+  if (historialIsActive()) renderHistory();
+}
+
+// ─── ANTOJOS ─────────────────────────────────────────────
+function toggleAntojo() { document.getElementById('antojo-panel').classList.toggle('open'); }
+function toggleChip(el) { el.classList.toggle('selected'); }
+function saveAntojo() {
+  var text  = document.getElementById('antojo-text').value.trim();
+  var chips = Array.from(document.querySelectorAll('.antojo-chip.selected')).map(function(c){ return c.textContent; });
+  if (!text && chips.length === 0) return;
+  antojos.push({
+    time: new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),
+    tipos: chips,
+    texto: text
+  });
+  sv('antojos_'+todayKey, antojos);
+  document.getElementById('antojo-text').value = '';
+  document.querySelectorAll('.antojo-chip').forEach(function(c){ c.classList.remove('selected'); });
+  document.getElementById('antojo-panel').classList.remove('open');
+  showToast('Antojo registrado ✓');
+}
+
+// ─── TABS ─────────────────────────────────────────────────
+function showTab(n,btn) {
+  document.querySelectorAll('.section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+  document.getElementById('tab-'+n).classList.add('active');
+  btn.classList.add('active');
+  if (n==='historial') renderHistory();
+}
+
+// ─── HISTORIAL ────────────────────────────────────────────
+function renderHistory() {
+  var c = document.getElementById('history-content');
+  var days = [];
+  for (var i=0; i<14; i++) {
+    var base = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));
+    base.setDate(base.getDate()-i);
+    var y  = base.getFullYear();
+    var mo = String(base.getMonth()+1).padStart(2,'0');
+    var dd = String(base.getDate()).padStart(2,'0');
+    var k  = y+'-'+mo+'-'+dd;
+    var m  = ld('meals_'+k, null);
+    var w  = ld('water_'+k, 0);
+    var a  = ld('antojos_'+k, []);
+    if ((m && Object.values(m).some(function(v){ return v; })) || w > 0) {
+      days.push({date:base, key:k, meals:m||{}, water:w, antojos:a});
+    }
   }
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url;
-  a.download='nutri-backup-'+new Date().toISOString().split('T')[0]+'.json';
-  a.click();
-  URL.revokeObjectURL(url);
+  if (days.length === 0) {
+    c.innerHTML = '<div class="empty-state"><div class="big">📋</div>Aún no hay historial.<br>Empieza registrando hoy.</div>';
+    return;
+  }
+  var mn = {desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación',cena:'Cena'};
+  c.innerHTML = days.map(function(d) {
+    var ds = d.date.toLocaleDateString('es-PE',{weekday:'short',day:'numeric',month:'short'});
+    var f  = Object.values(d.meals).filter(function(v){ return v; }).length;
+    var sc = f>=3?'var(--sage)':f>=2?'var(--warn)':'var(--clay)';
+    var mr = Object.entries(d.meals).filter(function(e){ return e[1]; }).map(function(e){
+      return '<div class="history-meal-row"><span class="history-meal-name">'+mn[e[0]]+'</span><span>'+(e[1].length>45?e[1].slice(0,45)+'…':e[1])+'</span></div>';
+    }).join('');
+    var an = d.antojos.length>0 ? '<div style="margin-top:8px;font-size:12px;color:var(--clay)">🍫 '+d.antojos.length+' antojo(s)</div>' : '';
+    return '<div class="history-day"><div class="history-day-header"><div class="history-date">'+ds+'</div><div class="history-score" style="background:'+sc+'22;color:'+sc+'">'+f+'/4 comidas</div></div><div class="history-meals">'+mr+'</div>'+an+'<div style="margin-top:4px;font-size:12px;color:var(--ink-light)">💧 '+d.water+'ml</div></div>';
+  }).join('');
 }
-function toggleImport(){document.getElementById('import-area').classList.toggle('open')}
-function importData(){
-  try{
-    const raw=document.getElementById('import-json').value.trim();
-    if(!raw){showToast('Pega el JSON primero');return}
-    const data=JSON.parse(raw);
-    let count=0;
-    if(data.meals){Object.entries(data.meals).forEach(([k,v])=>{sv('meals_'+k,v);count++})}
-    if(data.water){Object.entries(data.water).forEach(([k,v])=>{sv('water_'+k,v)})}
-    if(data.antojos){Object.entries(data.antojos).forEach(([k,v])=>{sv('antojos_'+k,v)})}
-    document.getElementById('import-json').value='';
+
+// ─── EXPORT / IMPORT ─────────────────────────────────────
+function exportData() {
+  var data = {meals:{},water:{},antojos:{},exported_at:new Date().toISOString(),version:1};
+  for (var i=0; i<365; i++) {
+    var base = new Date(new Date().toLocaleString('en-US',{timeZone:'America/Lima'}));
+    base.setDate(base.getDate()-i);
+    var y=base.getFullYear(), mo=String(base.getMonth()+1).padStart(2,'0'), dd=String(base.getDate()).padStart(2,'0');
+    var k = y+'-'+mo+'-'+dd;
+    var m = ld('meals_'+k,null);
+    var w = ld('water_'+k,0);
+    var a = ld('antojos_'+k,[]);
+    if (m && Object.values(m).some(function(v){return v;})) data.meals[k]=m;
+    if (w>0) data.water[k]=w;
+    if (a.length>0) data.antojos[k]=a;
+  }
+  var json = JSON.stringify(data,null,2);
+  var uri  = 'data:application/json;charset=utf-8,'+encodeURIComponent(json);
+  var a    = document.createElement('a');
+  a.href   = uri;
+  a.download = 'nutri-backup-'+getLocalDateKey()+'.json';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  showToast('Backup descargado ✓');
+}
+function toggleImport() { document.getElementById('import-area').classList.toggle('open'); }
+function importData() {
+  var raw = document.getElementById('import-json').value.trim();
+  if (!raw) { showToast('Pega el JSON primero'); return; }
+  try {
+    var data  = JSON.parse(raw);
+    var count = 0;
+    if (data.meals)   Object.entries(data.meals).forEach(function(e){ sv('meals_'+e[0],e[1]); count++; });
+    if (data.water)   Object.entries(data.water).forEach(function(e){ sv('water_'+e[0],e[1]); });
+    if (data.antojos) Object.entries(data.antojos).forEach(function(e){ sv('antojos_'+e[0],e[1]); });
+    document.getElementById('import-json').value = '';
     document.getElementById('import-area').classList.remove('open');
     showToast('✓ '+count+' días restaurados');
     renderHistory();
-  }catch(e){showToast('Error al leer el JSON')}
+  } catch(e) { showToast('Error al leer el JSON'); }
 }
 
-
-// COMPRAS
-let activePeriod = 'mensual';
-function setPeriod(p) {
-  activePeriod = p;
-  document.getElementById('period-mensual').classList.toggle('active', p === 'mensual');
-  document.getElementById('period-quincenal').classList.toggle('active', p === 'quincenal');
-}
-
-async function generateShoppingList() {
-  const budget = document.getElementById('budgetInput').value || 150;
-  const btn = document.getElementById('generateBtn');
-  const list = document.getElementById('shopping-list');
-  btn.disabled = true;
-  btn.textContent = 'Generando...';
-  list.classList.add('open');
-  document.getElementById('shop-categories').innerHTML = '<div class="shop-loading">Calculando tu lista con S/. ' + budget + '...</div>';
-  document.getElementById('shop-total-bar').innerHTML = '';
-
-  const pantry = ld('pantry_items', []).filter(i => i.active).map(i => i.name + ' (' + i.qty + ')').join(', ') || 'nada registrado aún';
-
-  const prompt = `Eres nutricionista y experta en mercados de Lima, Perú. Genera una lista de compras de despensa personal para Tri.
-
-Contexto:
-- Presupuesto: S/. ${budget} ${activePeriod}
-- Lo que ya tiene en casa: ${pantry}
-- Esta lista es SOLO para: desayunos, cenas post-pole y colaciones pre-pole
-- Los almuerzos los cubre su pareja con meal prep (NO incluir)
-- Sin lactosa. Ingredientes accesibles en mercado de barrio o Wong/Plaza Vea Lima
-- Priorizar: huevos, palta, frutas, verduras, avena, leche vegetal, maní/almendras, atún, pan integral, tostadas
-- Indicar si conviene comprar en MERCADO (más barato) o SUPERMERCADO (más conveniente)
-
-Responde SOLO con JSON válido sin texto extra ni backticks:
-{
-  "total_estimado": 145,
-  "categorias": [
-    {
-      "nombre": "Proteínas",
-      "tienda": "mercado",
-      "items": [
-        {"nombre": "Huevos", "cantidad": "12 unidades", "precio_aprox": 12, "detalle": "Para tortillas de cena y desayunos"},
-        {"nombre": "Atún en agua", "cantidad": "4 latas", "precio_aprox": 16, "detalle": "Sin aceite. Cenas rápidas sin cocinar"}
-      ]
-    }
-  ]
-}
-
-tienda debe ser: "mercado", "supermercado", o "ambos"
-precio_aprox en soles peruanos, realista para Lima 2025.
-Incluye 4-5 categorías con 3-5 items cada una. Total debe estar dentro del presupuesto.`;
-
+// ─── AI: ANALYZE DAY ─────────────────────────────────────
+async function analyzeDay() {
+  var m  = ld('meals_'+todayKey,{});
+  var mn = {desayuno:'Desayuno',almuerzo:'Almuerzo',colacion:'Colación pre-pole',cena:'Cena'};
+  if (!Object.values(m).some(function(v){return v;})) { showToast('Registra al menos una comida primero'); return; }
+  var parts = Object.entries(mn).map(function(e){ return e[1]+': '+(m[e[0]]||'no registrado'); });
+  parts.push('Agua: '+ld('water_'+todayKey,0)+'ml de 1500ml');
+  var a = ld('antojos_'+todayKey,[]);
+  a.forEach(function(ant){
+    var t = ant.tipos && ant.tipos.length>0 ? '('+ant.tipos.join(', ')+')' : '';
+    parts.push('Antojo a las '+ant.time+' '+t+': '+ant.texto);
+  });
+  var btn     = document.getElementById('analyzeBtn');
+  var card    = document.getElementById('analysis-card');
+  var loading = document.getElementById('analysis-loading');
+  var result  = document.getElementById('analysis-result');
+  btn.disabled=true; card.classList.add('open'); loading.style.display='flex'; result.innerHTML='';
+  var prompt = 'Eres nutricionista de seguimiento. Paciente: Tri, mujer, 58.35kg, 1.53m, pole sport 2x/semana por las noches, TDAH, sin lactosa. Objetivo: reducir grasa abdominal. Meta agua: 1500ml/día. Puntos débiles: antojos nocturnos, come por impulso/aburrimiento.\n\nRegistro de hoy:\n'+parts.join('\n')+'\n\nAnaliza (máx 180 palabras):\n✓ Qué estuvo bien\n⚠ Qué ajustar mañana (con alternativa concreta)\n💡 Insight si hubo antojo\n\nNo moralices. Tono directo y cercano.';
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
-    });
-    const data = await res.json();
-    const raw = data.content?.[0]?.text || '{}';
-    const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    var res  = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    var data = await res.json();
+    var text = (data.content&&data.content[0]&&data.content[0].text) ? data.content[0].text : 'No pude generar el análisis.';
+    loading.style.display='none';
+    result.innerHTML='<div class="analysis-text">'+text+'</div>';
+  } catch(e) {
+    loading.style.display='none';
+    result.innerHTML='<div class="analysis-text" style="color:var(--clay)">Error al conectar. Revisa tu conexión.</div>';
+  }
+  btn.disabled=false;
+}
+
+// ─── AI: IDEAS ────────────────────────────────────────────
+var SECTION_PROMPTS = {
+  desayunos: {label:'desayunos rápidos sin lactosa', note:'Sin lactosa. Máximo 10 min o sin cocinar. Ingredientes de mercado, Wong o Plaza Vea en Lima.'},
+  mealprep:  {label:'meal prep semanal', note:'Proteína magra horneada o guisada (NO frita), carbohidrato complejo, digestión lenta, sin sueño postalmuerzo. Sin lactosa. Incluye aliños para variar sabor.'},
+  colaciones:{label:'colaciones pre-entrenamiento de pole sport', note:'60-90 min antes de clase nocturna. Sin lactosa, sin cocinar o muy rápidas. Portátiles.'},
+  cenas:     {label:'cenas post-entrenamiento nocturno', note:'Altas en proteína, bajas en carbohidrato, fácil digestión. Sin lactosa. No generen reflujo. Rápidas.'},
+  finde:     {label:'opciones de fin de semana y antojos nocturnos', note:'Opciones reales en restaurantes de Lima. Alternativas para antojos dulces nocturnos. Sin lactosa.'}
+};
+async function refreshIdeas(section, btn) {
+  btn.disabled=true;
+  var container = document.getElementById('ideas-'+section);
+  container.innerHTML='<div class="ideas-loading">Generando nuevas ideas...</div>';
+  var info   = SECTION_PROMPTS[section];
+  var prompt = 'Eres nutricionista especializada en cocina peruana. Genera exactamente 4 ideas de '+info.label+'.\n\nRestricciones: '+info.note+'\n\nResponde SOLO con JSON válido sin texto extra ni backticks:\n[{"titulo":"...","detalle":"...","tag":"...","tagClass":"rapido"}]\n\ntagClass: rapido, mealprep, o finde. Detalle específico, máx 2 líneas.';
+  try {
+    var res  = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1000,messages:[{role:'user',content:prompt}]})});
+    var data = await res.json();
+    var raw  = (data.content&&data.content[0]) ? data.content[0].text : '[]';
+    var ideas= JSON.parse(raw.replace(/```json|```/g,'').trim());
+    container.innerHTML=ideas.map(function(i){ return '<div class="idea-card"><div class="idea-title">'+i.titulo+'</div><div class="idea-detail">'+i.detalle+'</div><span class="idea-tag tag-'+i.tagClass+'">'+i.tag+'</span></div>'; }).join('');
+  } catch(e) {
+    container.innerHTML='<div class="idea-card"><div class="idea-detail" style="color:var(--clay)">No se pudo cargar. Revisa tu conexión.</div></div>';
+  }
+  btn.disabled=false;
+}
+
+// ─── COMPRAS ──────────────────────────────────────────────
+var activePeriod = 'mensual';
+function setPeriod(p) {
+  activePeriod=p;
+  document.getElementById('period-mensual').classList.toggle('active',p==='mensual');
+  document.getElementById('period-quincenal').classList.toggle('active',p==='quincenal');
+}
+async function generateShoppingList() {
+  var budget = document.getElementById('budgetInput').value || 150;
+  var btn    = document.getElementById('generateBtn');
+  var list   = document.getElementById('shopping-list');
+  btn.disabled=true; btn.textContent='Generando...';
+  list.classList.add('open');
+  document.getElementById('shop-categories').innerHTML='<div class="shop-loading">Calculando tu lista con S/. '+budget+'...</div>';
+  document.getElementById('shop-total-bar').innerHTML='';
+  var pantry = ld('pantry_items',[]).filter(function(i){return i.active;}).map(function(i){return i.name+' ('+i.qty+')';}).join(', ')||'nada registrado';
+  var prompt = 'Eres nutricionista y experta en mercados de Lima, Perú. Genera lista de compras de despensa para Tri.\n\nPresupuesto: S/. '+budget+' '+activePeriod+'\nYa tiene en casa: '+pantry+'\nSOLO para: desayunos, cenas post-pole y colaciones pre-pole (NO almuerzos, los cubre el meal prep)\nSin lactosa. Ingredientes de mercado o Wong/Plaza Vea Lima.\nPriorizar: huevos, palta, frutas, verduras, avena, leche vegetal, maní/almendras, atún, pan integral.\nIndicar si conviene comprar en MERCADO o SUPERMERCADO.\n\nResponde SOLO con JSON válido sin backticks:\n{"total_estimado":145,"categorias":[{"nombre":"Proteínas","tienda":"mercado","items":[{"nombre":"Huevos","cantidad":"12 unidades","precio_aprox":12,"detalle":"Para tortillas y desayunos"}]}]}\n\ntienda: "mercado", "supermercado", o "ambos". precio_aprox en soles. 4-5 categorías con 3-5 items. Total dentro del presupuesto.';
+  try {
+    var res    = await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:1500,messages:[{role:'user',content:prompt}]})});
+    var data   = await res.json();
+    var raw    = (data.content&&data.content[0]) ? data.content[0].text : '{}';
+    var result = JSON.parse(raw.replace(/```json|```/g,'').trim());
     renderShoppingList(result);
   } catch(e) {
-    document.getElementById('shop-categories').innerHTML = '<div style="color:var(--clay);font-size:13px;padding:12px">Error al generar. Revisa tu conexión.</div>';
+    document.getElementById('shop-categories').innerHTML='<div style="color:var(--clay);font-size:13px;padding:12px">Error al generar. Revisa tu conexión.</div>';
   }
-  btn.disabled = false;
-  btn.textContent = 'Generar lista de compras ✦';
+  btn.disabled=false; btn.textContent='Generar lista de compras ✦';
 }
-
 function renderShoppingList(result) {
-  const badgeMap = { mercado: '<span class="shop-cat-badge badge-mercado">🏪 Mercado</span>', supermercado: '<span class="shop-cat-badge badge-super">🛒 Supermercado</span>', ambos: '<span class="shop-cat-badge badge-ambos">↔ Ambos</span>' };
-  const cats = (result.categorias || []).map(cat => {
-    const items = (cat.items || []).map(item => `
-      <div class="shop-item" id="si-${Math.random().toString(36).slice(2)}">
-        <input type="checkbox" class="shop-checkbox" onchange="this.closest('.shop-item').classList.toggle('checked',this.checked)">
-        <div class="shop-item-info">
-          <div class="shop-item-name">${item.nombre}</div>
-          <div class="shop-item-detail">${item.cantidad}${item.detalle ? ' · ' + item.detalle : ''}</div>
-        </div>
-        <div class="shop-item-price">~S/. ${item.precio_aprox}</div>
-      </div>`).join('');
-    return `<div class="shop-category">
-      <div class="shop-cat-header">
-        <div class="shop-cat-title">${cat.nombre}</div>
-        ${badgeMap[cat.tienda] || ''}
-      </div>
-      ${items}
-    </div>`;
+  var bm = {mercado:'<span class="shop-cat-badge badge-mercado">🏪 Mercado</span>',supermercado:'<span class="shop-cat-badge badge-super">🛒 Supermercado</span>',ambos:'<span class="shop-cat-badge badge-ambos">↔ Ambos</span>'};
+  var cats = (result.categorias||[]).map(function(cat){
+    var items = (cat.items||[]).map(function(item){
+      return '<div class="shop-item"><input type="checkbox" class="shop-checkbox" onchange="this.closest(\'.shop-item\').classList.toggle(\'checked\',this.checked)"><div class="shop-item-info"><div class="shop-item-name">'+item.nombre+'</div><div class="shop-item-detail">'+item.cantidad+(item.detalle?' · '+item.detalle:'')+'</div></div><div class="shop-item-price">~S/. '+item.precio_aprox+'</div></div>';
+    }).join('');
+    return '<div class="shop-category"><div class="shop-cat-header"><div class="shop-cat-title">'+cat.nombre+'</div>'+(bm[cat.tienda]||'')+'</div>'+items+'</div>';
   }).join('');
-
-  document.getElementById('shop-total-bar').innerHTML = `<div class="shop-total"><span class="shop-total-label">Total estimado (${activePeriod})</span><span class="shop-total-amount">S/. ${result.total_estimado || '—'}</span></div>`;
-  document.getElementById('shop-categories').innerHTML = cats;
+  document.getElementById('shop-total-bar').innerHTML='<div class="shop-total"><span class="shop-total-label">Total estimado ('+activePeriod+')</span><span class="shop-total-amount">S/. '+(result.total_estimado||'—')+'</span></div>';
+  document.getElementById('shop-categories').innerHTML=cats;
 }
 
-// PANTRY
+// ─── PANTRY ───────────────────────────────────────────────
 function togglePantryForm() { document.getElementById('pantry-form').classList.toggle('open'); }
-
 function addPantryItem() {
-  const name = document.getElementById('pantry-name').value.trim();
+  var name = document.getElementById('pantry-name').value.trim();
   if (!name) return;
-  const items = ld('pantry_items', []);
+  var items = ld('pantry_items',[]);
   items.push({
-    id: Date.now(),
-    name,
-    qty: document.getElementById('pantry-qty').value.trim() || '—',
-    cat: document.getElementById('pantry-cat').value,
-    days: parseInt(document.getElementById('pantry-days').value) || null,
-    added: getLocalDateKey(),
-    active: true
+    id:   Date.now(),
+    name: name,
+    qty:  document.getElementById('pantry-qty').value.trim()||'—',
+    cat:  document.getElementById('pantry-cat').value,
+    days: parseInt(document.getElementById('pantry-days').value)||null,
+    added:getLocalDateKey(),
+    active:true
   });
-  sv('pantry_items', items);
-  document.getElementById('pantry-name').value = '';
-  document.getElementById('pantry-qty').value = '';
-  document.getElementById('pantry-days').value = '';
+  sv('pantry_items',items);
+  document.getElementById('pantry-name').value='';
+  document.getElementById('pantry-qty').value='';
+  document.getElementById('pantry-days').value='';
   document.getElementById('pantry-form').classList.remove('open');
   renderPantry();
+  showToast('Agregado al inventario ✓');
 }
-
 function deletePantryItem(id) {
-  const items = ld('pantry_items', []).filter(i => i.id !== id);
-  sv('pantry_items', items);
+  var items = ld('pantry_items',[]).filter(function(i){return i.id!==id;});
+  sv('pantry_items',items);
   renderPantry();
+  showToast('Eliminado del inventario');
 }
-
 function renderPantry() {
-  const container = document.getElementById('pantry-items');
-  const items = ld('pantry_items', []).filter(i => i.active);
-  if (items.length === 0) {
-    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--ink-light);font-size:13px">Nada registrado aún.<br>Agrega lo que tienes para no olvidarlo.</div>';
+  var container = document.getElementById('pantry-items');
+  var items = ld('pantry_items',[]).filter(function(i){return i.active;});
+  if (items.length===0) {
+    container.innerHTML='<div style="text-align:center;padding:20px;color:var(--ink-light);font-size:13px">Nada registrado aún.<br>Agrega lo que tienes para no olvidarlo.</div>';
     return;
   }
-  const catEmoji = { verdura: '🥦', proteina: '🥚', carbohidrato: '🌾', otro: '📦' };
-  const today = new Date();
-  container.innerHTML = items.sort((a, b) => {
-    const daysLeftA = a.days ? a.days - Math.floor((today - new Date(a.added)) / 86400000) : 999;
-    const daysLeftB = b.days ? b.days - Math.floor((today - new Date(b.added)) / 86400000) : 999;
-    return daysLeftA - daysLeftB;
-  }).map(item => {
-    let badge = '', cls = '';
+  var catEmoji={verdura:'🥦',proteina:'🥚',carbohidrato:'🌾',otro:'📦'};
+  var toMs=function(s){var p=s.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])).getTime();};
+  var todayMs=toMs(getLocalDateKey());
+  items.sort(function(a,b){
+    var la=a.days?a.days-Math.round((todayMs-toMs(a.added))/86400000):999;
+    var lb=b.days?b.days-Math.round((todayMs-toMs(b.added))/86400000):999;
+    return la-lb;
+  });
+  container.innerHTML=items.map(function(item){
+    var badge='',cls='';
     if (item.days) {
-      const daysLeft = item.days - Math.floor((today - new Date(item.added)) / 86400000);
-      if (daysLeft <= 0) { badge = '<span class="pantry-expiry-badge badge-expired">Vencido</span>'; cls = 'expired'; }
-      else if (daysLeft <= 2) { badge = `<span class="pantry-expiry-badge badge-soon">Vence en ${daysLeft}d</span>`; cls = 'expiring'; }
-      else { badge = `<span class="pantry-expiry-badge badge-ok">${daysLeft}d restantes</span>`; }
+      var dl=item.days-Math.round((todayMs-toMs(item.added))/86400000);
+      if (dl<=0) {badge='<span class="pantry-expiry-badge badge-expired">Vencido</span>';cls='expired';}
+      else if (dl<=2) {badge='<span class="pantry-expiry-badge badge-soon">Vence en '+dl+'d</span>';cls='expiring';}
+      else {badge='<span class="pantry-expiry-badge badge-ok">'+dl+'d restantes</span>';}
     }
-    return `<div class="pantry-item ${cls}">
-      <span style="font-size:18px">${catEmoji[item.cat] || '📦'}</span>
-      <div class="pantry-item-info">
-        <div class="pantry-item-name">${item.name}</div>
-        <div class="pantry-item-meta">${item.qty}${item.added ? ' · desde ' + new Date(item.added).toLocaleDateString('es-PE', {day:'numeric',month:'short'}) : ''}</div>
-      </div>
-      ${badge}
-      <button class="pantry-delete" onclick="deletePantryItem(${item.id})">×</button>
-    </div>`;
+    var addedStr='';
+    if (item.added) {
+      var p=item.added.split('-');
+      addedStr=' · desde '+new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])).toLocaleDateString('es-PE',{day:'numeric',month:'short'});
+    }
+    return '<div class="pantry-item '+cls+'"><span style="font-size:18px">'+(catEmoji[item.cat]||'📦')+'</span><div class="pantry-item-info"><div class="pantry-item-name">'+item.name+'</div><div class="pantry-item-meta">'+item.qty+addedStr+'</div></div>'+badge+'<button class="pantry-delete" onclick="deletePantryItem('+item.id+')">×</button></div>';
   }).join('');
 }
 
-
-function showToast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2200);
-}
+// ─── INIT ─────────────────────────────────────────────────
+buildMealSlots();
+renderMeals();
+renderWater();
+renderPantry();
 </script>
-<div class="toast" id="toast"></div>
 </body>
 </html>
