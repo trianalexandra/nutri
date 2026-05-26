@@ -104,6 +104,65 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
 .import-area{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:14px;display:none}
 .import-area.open{display:block}
 .import-area textarea{width:100%;border:1px solid var(--border);border-radius:var(--radius-sm);padding:10px;font-family:'DM Sans',sans-serif;font-size:12px;color:var(--ink);background:var(--sand);resize:none;min-height:80px;outline:none;margin-bottom:8px}
+
+/* COMPRAS */
+.budget-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+.budget-row{display:flex;gap:10px;align-items:flex-end;margin-bottom:14px}
+.budget-input-wrap{flex:1}
+.budget-label{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-light);margin-bottom:6px}
+.budget-input{width:100%;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:10px 12px;font-family:'DM Sans',sans-serif;font-size:16px;font-weight:500;color:var(--ink);background:var(--sand);outline:none}
+.budget-input:focus{border-color:var(--sage)}
+.period-btns{display:flex;gap:6px}
+.period-btn{padding:10px 12px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:12px;font-weight:500;color:var(--ink-light);background:var(--white);cursor:pointer;transition:all 0.15s;white-space:nowrap}
+.period-btn.active{background:var(--sage-light);border-color:var(--sage);color:var(--sage)}
+.generate-btn{width:100%;padding:13px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Serif Display',serif;font-size:16px;cursor:pointer;transition:opacity 0.15s}
+.generate-btn:hover{opacity:.88}
+.generate-btn:disabled{opacity:.5;cursor:not-allowed}
+.shopping-list{margin-bottom:14px;display:none}
+.shopping-list.open{display:block}
+.shop-category{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:10px}
+.shop-cat-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.shop-cat-title{font-size:12px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-light)}
+.shop-cat-badge{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:500}
+.badge-mercado{background:#e8f4e8;color:#2d7a2d}
+.badge-super{background:#e8eef8;color:#2d4a8a}
+.badge-ambos{background:var(--warn-light);color:var(--warn)}
+.shop-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)}
+.shop-item:last-child{border-bottom:none;padding-bottom:0}
+.shop-checkbox{width:18px;height:18px;min-width:18px;border:1.5px solid var(--sage-mid);border-radius:4px;cursor:pointer;appearance:none;background:var(--white);margin-top:1px;transition:all 0.15s}
+.shop-checkbox:checked{background:var(--sage);border-color:var(--sage)}
+.shop-item-info{flex:1}
+.shop-item-name{font-size:14px;font-weight:500;transition:color 0.15s}
+.shop-item.checked .shop-item-name{text-decoration:line-through;color:var(--ink-light)}
+.shop-item-detail{font-size:12px;color:var(--ink-light);margin-top:2px}
+.shop-item-price{font-size:12px;font-weight:500;color:var(--sage);white-space:nowrap}
+.shop-total{background:var(--sage-light);border:1px solid var(--sage-mid);border-radius:var(--radius-sm);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.shop-total-label{font-size:13px;color:var(--sage)}
+.shop-total-amount{font-family:'DM Serif Display',serif;font-size:20px;color:var(--sage)}
+.shop-loading{text-align:center;padding:24px;color:var(--ink-light);font-size:14px}
+
+/* INVENTARIO */
+.pantry-section{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin-bottom:14px}
+.pantry-add-form{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.pantry-add-form.open{display:block}
+.pantry-form-row{display:flex;gap:8px;margin-bottom:8px}
+.pantry-input{flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--sand);outline:none}
+.pantry-input:focus{border-color:var(--sage)}
+.pantry-select{flex:1;border:1.5px solid var(--border);border-radius:var(--radius-sm);padding:9px 12px;font-family:'DM Sans',sans-serif;font-size:13px;color:var(--ink);background:var(--sand);outline:none}
+.pantry-add-btn{padding:9px 16px;background:var(--sage);color:var(--white);border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer}
+.pantry-items{display:flex;flex-direction:column;gap:6px;margin-top:12px}
+.pantry-item{display:flex;align-items:center;gap:10px;padding:10px 12px;background:var(--sand);border-radius:var(--radius-sm);border:1px solid var(--border)}
+.pantry-item.expiring{background:#fff8e8;border-color:#f0d090}
+.pantry-item.expired{background:#fff0f0;border-color:#f0b0b0}
+.pantry-item-info{flex:1}
+.pantry-item-name{font-size:13px;font-weight:500}
+.pantry-item-meta{font-size:11px;color:var(--ink-light);margin-top:2px}
+.pantry-expiry-badge{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;white-space:nowrap}
+.badge-ok{background:var(--sage-light);color:var(--sage)}
+.badge-soon{background:var(--warn-light);color:var(--warn)}
+.badge-expired{background:#ffe0e0;color:#c43030}
+.pantry-delete{background:none;border:none;color:var(--ink-light);cursor:pointer;font-size:16px;padding:2px 4px;line-height:1}
+.toggle-form-btn{font-size:13px;color:var(--sage);background:none;border:1px solid var(--sage-mid);border-radius:20px;padding:4px 12px;cursor:pointer;font-family:'DM Sans',sans-serif;font-weight:500}
 </style>
 </head>
 <body>
@@ -116,6 +175,7 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
     <button class="tab-btn active" onclick="showTab('hoy',this)">Hoy</button>
     <button class="tab-btn" onclick="showTab('historial',this)">Historial</button>
     <button class="tab-btn" onclick="showTab('ideas',this)">Ideas</button>
+    <button class="tab-btn" onclick="showTab('compras',this)">Compras</button>
   </div>
 </div>
 <div class="main">
@@ -275,6 +335,59 @@ body{font-family:'DM Sans',sans-serif;background:var(--sand);color:var(--ink);mi
   </div>
 </div>
 
+<!-- COMPRAS -->
+<div class="section" id="tab-compras">
+
+  <div class="budget-card">
+    <div class="card-label">💰 Presupuesto de despensa personal</div>
+    <div class="budget-row">
+      <div class="budget-input-wrap">
+        <div class="budget-label">Monto en soles</div>
+        <input class="budget-input" type="number" id="budgetInput" placeholder="150" min="20" max="500">
+      </div>
+      <div>
+        <div class="budget-label">Período</div>
+        <div class="period-btns">
+          <button class="period-btn active" id="period-mensual" onclick="setPeriod('mensual')">Mensual</button>
+          <button class="period-btn" id="period-quincenal" onclick="setPeriod('quincenal')">Quincenal</button>
+        </div>
+      </div>
+    </div>
+    <button class="generate-btn" id="generateBtn" onclick="generateShoppingList()">Generar lista de compras ✦</button>
+  </div>
+
+  <div class="shopping-list" id="shopping-list">
+    <div id="shop-total-bar"></div>
+    <div id="shop-categories"></div>
+  </div>
+
+  <div class="pantry-section">
+    <div class="card-label" style="margin-bottom:0">🧺 Lo que tengo en casa</div>
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px">
+      <div style="font-size:12px;color:var(--ink-light)">Registra para no olvidar ni desperdiciar</div>
+      <button class="toggle-form-btn" onclick="togglePantryForm()">+ Agregar</button>
+    </div>
+    <div class="pantry-add-form" id="pantry-form">
+      <div class="pantry-form-row">
+        <input class="pantry-input" id="pantry-name" placeholder="Ej: Palta, Huevos, Avena..." style="flex:2">
+        <input class="pantry-input" id="pantry-qty" placeholder="Cant. (Ej: 6 u, 500g)" style="flex:1">
+      </div>
+      <div class="pantry-form-row">
+        <select class="pantry-select" id="pantry-cat">
+          <option value="verdura">🥦 Verdura / fruta</option>
+          <option value="proteina">🥚 Proteína</option>
+          <option value="carbohidrato">🌾 Carbohidrato</option>
+          <option value="otro">📦 Otro</option>
+        </select>
+        <input class="pantry-input" id="pantry-days" type="number" placeholder="Días que dura" min="1" max="365">
+      </div>
+      <button class="pantry-add-btn" onclick="addPantryItem()" style="width:100%">Guardar en inventario</button>
+    </div>
+    <div class="pantry-items" id="pantry-items"></div>
+  </div>
+
+</div>
+
 </div>
 <script>
 document.getElementById('todayDate').textContent = new Date().toLocaleDateString('es-PE',{weekday:'long',day:'numeric',month:'long'});
@@ -294,6 +407,7 @@ function renderMeals(){['desayuno','almuerzo','colacion','cena'].forEach(m=>{con
 function toggleSlot(n){const s=document.getElementById('slot-'+n),o=s.classList.contains('open');document.querySelectorAll('.meal-slot').forEach(x=>x.classList.remove('open'));if(!o)s.classList.add('open')}
 function saveMeal(n){const v=document.getElementById('input-'+n).value.trim();if(!v)return;meals[n]=v;sv('meals_'+todayKey,meals);document.getElementById('slot-'+n).classList.remove('open');renderMeals()}
 renderMeals();
+renderPantry();
 function toggleAntojo(){document.getElementById('antojo-panel').classList.toggle('open')}
 function toggleChip(el){el.classList.toggle('selected')}
 function saveAntojo(){const text=document.getElementById('antojo-text').value.trim();const chips=[...document.querySelectorAll('.antojo-chip.selected')].map(c=>c.textContent);if(!text&&chips.length===0)return;antojos.push({time:new Date().toLocaleTimeString('es-PE',{hour:'2-digit',minute:'2-digit'}),tipos:chips,texto:text});sv('antojos_'+todayKey,antojos);document.getElementById('antojo-text').value='';document.querySelectorAll('.antojo-chip').forEach(c=>c.classList.remove('selected'));document.getElementById('antojo-panel').classList.remove('open');alert('Antojo registrado ✓')}
@@ -379,6 +493,162 @@ function importData(){
     alert('✓ Datos importados correctamente. '+count+' días restaurados.');
     renderHistory();
   }catch(e){alert('Error al leer el JSON. Asegúrate de pegar el archivo completo sin modificar.')}
+}
+
+
+// COMPRAS
+let activePeriod = 'mensual';
+function setPeriod(p) {
+  activePeriod = p;
+  document.getElementById('period-mensual').classList.toggle('active', p === 'mensual');
+  document.getElementById('period-quincenal').classList.toggle('active', p === 'quincenal');
+}
+
+async function generateShoppingList() {
+  const budget = document.getElementById('budgetInput').value || 150;
+  const btn = document.getElementById('generateBtn');
+  const list = document.getElementById('shopping-list');
+  btn.disabled = true;
+  btn.textContent = 'Generando...';
+  list.classList.add('open');
+  document.getElementById('shop-categories').innerHTML = '<div class="shop-loading">Calculando tu lista con S/. ' + budget + '...</div>';
+  document.getElementById('shop-total-bar').innerHTML = '';
+
+  const pantry = ld('pantry_items', []).filter(i => i.active).map(i => i.name + ' (' + i.qty + ')').join(', ') || 'nada registrado aún';
+
+  const prompt = `Eres nutricionista y experta en mercados de Lima, Perú. Genera una lista de compras de despensa personal para Tri.
+
+Contexto:
+- Presupuesto: S/. ${budget} ${activePeriod}
+- Lo que ya tiene en casa: ${pantry}
+- Esta lista es SOLO para: desayunos, cenas post-pole y colaciones pre-pole
+- Los almuerzos los cubre su pareja con meal prep (NO incluir)
+- Sin lactosa. Ingredientes accesibles en mercado de barrio o Wong/Plaza Vea Lima
+- Priorizar: huevos, palta, frutas, verduras, avena, leche vegetal, maní/almendras, atún, pan integral, tostadas
+- Indicar si conviene comprar en MERCADO (más barato) o SUPERMERCADO (más conveniente)
+
+Responde SOLO con JSON válido sin texto extra ni backticks:
+{
+  "total_estimado": 145,
+  "categorias": [
+    {
+      "nombre": "Proteínas",
+      "tienda": "mercado",
+      "items": [
+        {"nombre": "Huevos", "cantidad": "12 unidades", "precio_aprox": 12, "detalle": "Para tortillas de cena y desayunos"},
+        {"nombre": "Atún en agua", "cantidad": "4 latas", "precio_aprox": 16, "detalle": "Sin aceite. Cenas rápidas sin cocinar"}
+      ]
+    }
+  ]
+}
+
+tienda debe ser: "mercado", "supermercado", o "ambos"
+precio_aprox en soles peruanos, realista para Lima 2025.
+Incluye 4-5 categorías con 3-5 items cada una. Total debe estar dentro del presupuesto.`;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1500, messages: [{ role: 'user', content: prompt }] })
+    });
+    const data = await res.json();
+    const raw = data.content?.[0]?.text || '{}';
+    const result = JSON.parse(raw.replace(/```json|```/g, '').trim());
+    renderShoppingList(result);
+  } catch(e) {
+    document.getElementById('shop-categories').innerHTML = '<div style="color:var(--clay);font-size:13px;padding:12px">Error al generar. Revisa tu conexión.</div>';
+  }
+  btn.disabled = false;
+  btn.textContent = 'Generar lista de compras ✦';
+}
+
+function renderShoppingList(result) {
+  const badgeMap = { mercado: '<span class="shop-cat-badge badge-mercado">🏪 Mercado</span>', supermercado: '<span class="shop-cat-badge badge-super">🛒 Supermercado</span>', ambos: '<span class="shop-cat-badge badge-ambos">↔ Ambos</span>' };
+  const cats = (result.categorias || []).map(cat => {
+    const items = (cat.items || []).map(item => `
+      <div class="shop-item" id="si-${Math.random().toString(36).slice(2)}">
+        <input type="checkbox" class="shop-checkbox" onchange="this.closest('.shop-item').classList.toggle('checked',this.checked)">
+        <div class="shop-item-info">
+          <div class="shop-item-name">${item.nombre}</div>
+          <div class="shop-item-detail">${item.cantidad}${item.detalle ? ' · ' + item.detalle : ''}</div>
+        </div>
+        <div class="shop-item-price">~S/. ${item.precio_aprox}</div>
+      </div>`).join('');
+    return `<div class="shop-category">
+      <div class="shop-cat-header">
+        <div class="shop-cat-title">${cat.nombre}</div>
+        ${badgeMap[cat.tienda] || ''}
+      </div>
+      ${items}
+    </div>`;
+  }).join('');
+
+  document.getElementById('shop-total-bar').innerHTML = `<div class="shop-total"><span class="shop-total-label">Total estimado (${activePeriod})</span><span class="shop-total-amount">S/. ${result.total_estimado || '—'}</span></div>`;
+  document.getElementById('shop-categories').innerHTML = cats;
+}
+
+// PANTRY
+function togglePantryForm() { document.getElementById('pantry-form').classList.toggle('open'); }
+
+function addPantryItem() {
+  const name = document.getElementById('pantry-name').value.trim();
+  if (!name) return;
+  const items = ld('pantry_items', []);
+  items.push({
+    id: Date.now(),
+    name,
+    qty: document.getElementById('pantry-qty').value.trim() || '—',
+    cat: document.getElementById('pantry-cat').value,
+    days: parseInt(document.getElementById('pantry-days').value) || null,
+    added: new Date().toISOString().split('T')[0],
+    active: true
+  });
+  sv('pantry_items', items);
+  document.getElementById('pantry-name').value = '';
+  document.getElementById('pantry-qty').value = '';
+  document.getElementById('pantry-days').value = '';
+  document.getElementById('pantry-form').classList.remove('open');
+  renderPantry();
+}
+
+function deletePantryItem(id) {
+  const items = ld('pantry_items', []).filter(i => i.id !== id);
+  sv('pantry_items', items);
+  renderPantry();
+}
+
+function renderPantry() {
+  const container = document.getElementById('pantry-items');
+  const items = ld('pantry_items', []).filter(i => i.active);
+  if (items.length === 0) {
+    container.innerHTML = '<div style="text-align:center;padding:20px;color:var(--ink-light);font-size:13px">Nada registrado aún.<br>Agrega lo que tienes para no olvidarlo.</div>';
+    return;
+  }
+  const catEmoji = { verdura: '🥦', proteina: '🥚', carbohidrato: '🌾', otro: '📦' };
+  const today = new Date();
+  container.innerHTML = items.sort((a, b) => {
+    const daysLeftA = a.days ? a.days - Math.floor((today - new Date(a.added)) / 86400000) : 999;
+    const daysLeftB = b.days ? b.days - Math.floor((today - new Date(b.added)) / 86400000) : 999;
+    return daysLeftA - daysLeftB;
+  }).map(item => {
+    let badge = '', cls = '';
+    if (item.days) {
+      const daysLeft = item.days - Math.floor((today - new Date(item.added)) / 86400000);
+      if (daysLeft <= 0) { badge = '<span class="pantry-expiry-badge badge-expired">Vencido</span>'; cls = 'expired'; }
+      else if (daysLeft <= 2) { badge = `<span class="pantry-expiry-badge badge-soon">Vence en ${daysLeft}d</span>`; cls = 'expiring'; }
+      else { badge = `<span class="pantry-expiry-badge badge-ok">${daysLeft}d restantes</span>`; }
+    }
+    return `<div class="pantry-item ${cls}">
+      <span style="font-size:18px">${catEmoji[item.cat] || '📦'}</span>
+      <div class="pantry-item-info">
+        <div class="pantry-item-name">${item.name}</div>
+        <div class="pantry-item-meta">${item.qty}${item.added ? ' · desde ' + new Date(item.added).toLocaleDateString('es-PE', {day:'numeric',month:'short'}) : ''}</div>
+      </div>
+      ${badge}
+      <button class="pantry-delete" onclick="deletePantryItem(${item.id})">×</button>
+    </div>`;
+  }).join('');
 }
 
 </script>
